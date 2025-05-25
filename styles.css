@@ -1,0 +1,335 @@
+/* Reset and base styles */
+:root {
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+    --body-M: 400 1rem/1.5 var(--font-family);
+    --body-M-semibold: 500 1rem/1.5 var(--font-family);
+    --body-L: 400 1.25rem/1.6 var(--font-family);
+    --body-L-semibold: 500 1.25rem/1.6 var(--font-family);
+    --title-M: 400 2rem/1.5 var(--font-family);
+    --title-M-light: 200 2rem/1.5 var(--font-family);
+
+    --text-default: #141414;
+    --text-subtle: #666769;
+    --text-accent: #367AE0;
+    --text-accent-hover: #2c5aa0;
+
+    --surface-bg: #F5F7FA;
+    --surface-card: #F0F2F5;
+    --surface-link: #E9EDF5;
+    --surface-divider: #E0E2E5;
+}
+
+/* Global styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    background-color: var(--surface-bg);
+    font-family: var(--font-family);
+    color: var(--text-default);
+    padding: 0 16px;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto 128px auto;
+
+    &.columns {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+    }
+}
+
+.section-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    min-height: 64px;
+    padding: 16px 0;
+}
+
+.section-title {
+    font: var(--body-M);
+    color: var(--text-subtle);
+    padding-left: 32px;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background: var(--surface-card);
+    border-radius: 32px;
+    overflow: hidden;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+}
+
+.card-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 32px;
+}
+
+.card-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid var(--surface-divider);
+    overflow: hidden;
+}
+
+.card-title {
+    font: var(--body-L-semibold);
+    color: var(--text-default);
+}
+
+.card-description {
+    font: var(--body-M);
+    color: var(--text-subtle);
+}
+
+.card-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.card-link-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 32px;
+}
+
+.card-link {
+    width: 100%;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--surface-divider);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font: var(--body-M-semibold);
+    color: var(--text-default);
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+
+    &:last-child {
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+}
+
+.accent-link {
+    display: inline-block;
+    font: var(--body-M-semibold);
+    color: var(--text-accent);
+    text-decoration: none;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+}
+
+.accent-link::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-accent-hover);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-in-out;
+}
+
+.accent-link:hover {
+    color: var(--text-accent-hover);
+}
+
+.accent-link:hover::before {
+    transform: scaleX(1);
+}
+
+.accent-link:not(:hover)::before {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
+/* Navigation */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    padding: 8px 0;
+}
+
+.nav-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(var(--surface-bg), 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 99px;
+    padding: 2px;
+}
+
+.nav-link {
+    display: inline-block;
+    padding: 4px 16px;
+    text-decoration: none;
+    font: var(--body-M);
+    color: var(--text-subtle);
+    background-color: transparent;
+    border-radius: 99px;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    background-color: var(--surface-link);
+    color:var(--text-default);
+}
+
+/* Hero Section */
+.hero-content {
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 128px 0;
+    margin-top: 52px;
+    margin-bottom: 0;
+}
+
+.hero-title {
+    font: var(--title-M-light);
+    color: var(--text-default);
+    letter-spacing: -0.02em;
+}
+
+/* Projects Section */
+.nav-arrow-wrapper {
+    display: flex;
+    gap: 1px;
+}
+
+.nav-arrow {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 8px;
+    font: var(--body-M-semibold);
+    color: var(--text-subtle);
+    border: none;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+        color: var(--text-default);
+        background-color: var(--surface-link);
+    }
+}
+
+.projects-container {
+    width: 100%;
+    overflow: visible;
+}
+
+.projects-wrapper {
+    display: flex;
+    gap: 16px;
+    transition: transform 0.2s ease-out;
+}
+
+.project-card {
+    flex-shrink: 0;
+    width: calc(50% - 8px);
+    scroll-snap-align: start;
+}
+
+/* GDDs Section */
+.gdds-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.gdd-card {
+    height: 500px;
+    justify-content: space-between;
+}
+
+/* About Section */
+.about-content, 
+.contact-content {
+    grid-column: span 2;
+}
+
+.about-text,
+.contact-text {
+    font: var(--body-L);
+    color: var(--text-default);
+    margin-bottom: 24px;
+}
+
+.expandable-text {
+    padding: 4px 8px;
+    color: var(--text-default);
+    background-color: var(--surface-link);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        color: var(--text-accent);
+    }
+}
+
+.hidden-text {
+    display: none;
+    color: var(--text-default);
+}
+
+.typing-char {
+    position: relative;
+}
+
+/* Animation classes */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Contact Section */
+.contact-links {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+}

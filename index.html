@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bohdan Polishchuk - Game Designer</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#gdds" class="nav-link">GDDs</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container hero-content">
+                <h1 class="hero-title">
+                    Hi! I'm Bohdan Polishchuk,<br />
+                    a young game designer with ambitions and unparalleled experience
+                </h1>
+                <a href="#about" class="hero-link accent-link">Learn more →</a>
+            </div>
+        </section>
+
+        <section id="projects" class="projects">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title fade-in">Projects</h2>
+                    <div class="nav-arrow-wrapper">
+                        <button class="nav-arrow prev" onclick="scrollProjects(-1)">←</button>
+                        <button class="nav-arrow next" onclick="scrollProjects(1)">→</button>
+                    </div>
+                </div>
+                
+                <div class="projects-container">
+                    <div class="projects-wrapper">
+                        <a href="#" class="card project-card fade-in">
+                            <div class="card-info">
+                                <h3 class="card-title">Sweet Escape →</h3>
+                                <p class="card-description">Climb high or get caught below</p>
+                            </div>
+                            <img src="images/project-image-placeholder.png" alt="Sweet Escape" class="card-image">
+                        </a>
+
+                        <a href="#" class="card project-card fade-in">
+                            <div class="card-info">
+                                <h3 class="card-title">Sweet Escape →</h3>
+                                <p class="card-description">Climb high or get caught below</p>
+                            </div>
+                            <img src="images/project-image-placeholder.png" alt="Sweet Escape" class="card-image">
+                        </a>
+
+                        <a href="#" class="card project-card fade-in">
+                            <div class="card-info">
+                                <h3 class="card-title">Sweet Escape →</h3>
+                                <p class="card-description">Climb high or get caught below</p>
+                            </div>
+                            <img src="images/project-image-placeholder.png" alt="Sweet Escape" class="card-image">
+                        </a>
+
+                        <a href="#" class="card project-card fade-in">
+                            <div class="card-info">
+                                <h3 class="card-title">Sweet Escape →</h3>
+                                <p class="card-description">Climb high or get caught below</p>
+                            </div>
+                            <img src="images/project-image-placeholder.png" alt="Sweet Escape" class="card-image">
+                        </a>
+
+                        <a href="#" class="card project-card fade-in">
+                            <div class="card-info">
+                                <h3 class="card-title">Sweet Escape →</h3>
+                                <p class="card-description">Climb high or get caught below</p>
+                            </div>
+                            <img src="images/project-image-placeholder.png" alt="Sweet Escape" class="card-image">
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gdds" class="gdds">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title fade-in">Game Design Documents</h2>
+                </div>
+                
+                <div class="gdds-wrapper">
+                    <div class="card gdd-card fade-in">
+                        <div class="card-info">
+                            <img src="images/gdd-icon-placeholder.png" alt="Icon" class="card-icon">
+                            <h3 class="card-title">Sweet Escape</h3>
+                            <p class="card-description">Some short description, up to 2 lines if possible</p>
+                        </div>
+                        <div class="card-link-wrapper">
+                            <a href="" class="card-link">GDD →</a>
+                            <a href="" class="card-link">VS →</a>
+                            <a href="" class="card-link">VR →</a>
+                        </div>
+                    </div>
+
+                    <div class="card gdd-card fade-in">
+                        <div class="card-info">
+                            <img src="images/gdd-icon-placeholder.png" alt="Icon" class="card-icon">
+                            <h3 class="card-title">Sweet Escape</h3>
+                            <p class="card-description">Some short description, up to 2 lines if possible</p>
+                        </div>
+                        <div class="card-link-wrapper">
+                            <a href="" class="card-link">GDD →</a>
+                            <a href="" class="card-link">VS →</a>
+                            <a href="" class="card-link">VR →</a>
+                        </div>
+                    </div>
+
+                    <div class="card gdd-card fade-in">
+                        <div class="card-info">
+                            <img src="images/gdd-icon-placeholder.png" alt="Icon" class="card-icon">
+                            <h3 class="card-title">Sweet Escape</h3>
+                            <p class="card-description">Some short description, up to 2 lines if possible</p>
+                        </div>
+                        <div class="card-link-wrapper">
+                            <a href="" class="card-link">GDD →</a>
+                            <a href="" class="card-link">VS →</a>
+                            <a href="" class="card-link">VR →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about">
+            <div class="container columns">
+                <h2 class="section-title fade-in">About</h2>
+                <div class="about-content">
+                    <p class="about-text fade-in">
+                        Here goes some text with click-to-disclose story. At the end of each sentence there is a
+                        <span class="expandable-text" onclick="toggleExpand(this)">link</span><span class="hidden-text">the expanded content that was hidden before</span>. It reveals an additional sentence on 
+                        <span class="expandable-text" onclick="toggleExpand(this)">click</span><span class="hidden-text">every time you click on the link, the hidden text will be revealed</span>.
+                    </p>
+                    <a href="#" class="resume-link accent-link fade-in">My resume →</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact">
+            <div class="container columns">
+                <h2 class="section-title fade-in">Contact</h2>
+                <div class="contact-content">
+                    <p class="contact-text fade-in">Message me about a new position. Or about a new game you're working on. Or about something cool you've seen recently. In any case, message me to say hello, I'm all ears.</p>
+                    <div class="contact-links fade-in">
+                        <a href="https://linkedin.com/in/bohdan-polishchuk" class="contact-link accent-link">LinkedIn →</a>
+                        <a href="mailto:bohdan@gmail.com" class="contact-link accent-link">bohdan@gmail.com →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html> 

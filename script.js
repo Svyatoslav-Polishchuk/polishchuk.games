@@ -193,13 +193,73 @@ function toggleExpand(element) {
     const hiddenText = element.nextElementSibling;
     
     if (hiddenText && hiddenText.classList.contains('hidden-text')) {
-        if (hiddenText.style.display === 'none' || hiddenText.style.display === '') {
-            hiddenText.style.display = 'inline';
-            element.textContent = 'Show less';
-        } else {
-            hiddenText.style.display = 'none';
-            element.textContent = 'Yay!';
+        // Hide the clicked expandable element
+        element.style.display = 'none';
+        
+        // Show the hidden text with typing animation
+        hiddenText.style.display = 'inline';
+        
+        // Get the full text content
+        const fullText = hiddenText.textContent;
+        
+        // Clear the text and start typing animation
+        hiddenText.innerHTML = '';
+        
+        // Natural typing animation with variable speeds
+        let i = 0;
+        
+        function getTypingDelay(char, nextChar) {
+            const baseSpeed = 40; // Base typing speed
+            const variation = Math.random() * 30; // Random variation (0-30ms)
+            
+            // Longer pauses for punctuation
+            if (char === '.' || char === '!' || char === '?') {
+                return baseSpeed + variation + 200;
+            }
+            if (char === ',' || char === ';') {
+                return baseSpeed + variation + 100;
+            }
+            if (char === ' ') {
+                return baseSpeed + variation + 20;
+            }
+            
+            // Slightly faster for common letter combinations
+            const commonPairs = ['th', 'he', 'in', 'er', 'an', 're', 'ed', 'nd', 'ou', 'ea'];
+            const currentPair = char + (nextChar || '');
+            if (commonPairs.includes(currentPair.toLowerCase())) {
+                return Math.max(15, baseSpeed + variation - 15);
+            }
+            
+            return baseSpeed + variation;
         }
+        
+        function typeCharacter() {
+            if (i < fullText.length) {
+                const currentChar = fullText.charAt(i);
+                const nextChar = fullText.charAt(i + 1);
+                
+                // Create a span for the new character with grey color
+                const charSpan = document.createElement('span');
+                charSpan.textContent = currentChar;
+                charSpan.style.color = '#999';
+                charSpan.style.transition = 'color 0.8s ease-in-out';
+                charSpan.classList.add('typing-char');
+                
+                hiddenText.appendChild(charSpan);
+                
+                // Fade to black after a delay
+                setTimeout(() => {
+                    charSpan.style.color = 'var(--text-default)';
+                }, 300 + Math.random() * 200); // Random delay between 300-500ms
+                
+                const delay = getTypingDelay(currentChar, nextChar);
+                i++;
+                setTimeout(typeCharacter, delay);
+            }
+        }
+        
+        // Start typing after a small delay
+        setTimeout(typeCharacter, 150);
     }
 }
 

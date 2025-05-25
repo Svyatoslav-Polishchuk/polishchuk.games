@@ -12,6 +12,7 @@
     --text-default: #141414;
     --text-subtle: #666769;
     --text-accent: #367AE0;
+    --text-accent-hover: #2c5aa0;
 
     --surface-bg: #F5F7FA;
     --surface-card: #F0F2F5;
@@ -23,6 +24,8 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 body {
@@ -36,6 +39,12 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto 128px auto;
+
+    &.columns {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+    }
 }
 
 .section-header {
@@ -43,12 +52,14 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 16px 16px 32px;
+    min-height: 64px;
+    padding: 16px 0;
 }
 
 .section-title {
     font: var(--body-M);
     color: var(--text-subtle);
+    padding-left: 32px;
 }
 
 .card {
@@ -119,6 +130,41 @@ body {
     }
 }
 
+.accent-link {
+    display: inline-block;
+    font: var(--body-M-semibold);
+    color: var(--text-accent);
+    text-decoration: none;
+    position: relative;
+    transition: all 0.2s ease-in-out;
+}
+
+.accent-link::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--text-accent-hover);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease-in-out;
+}
+
+.accent-link:hover {
+    color: var(--text-accent-hover);
+}
+
+.accent-link:hover::before {
+    transform: scaleX(1);
+}
+
+.accent-link:not(:hover)::before {
+    transform: scaleX(0);
+    transform-origin: right;
+}
+
 /* Navigation */
 .nav {
     position: fixed;
@@ -171,21 +217,6 @@ body {
     font: var(--title-M-light);
     color: var(--text-default);
     letter-spacing: -0.02em;
-}
-
-.cta-link {
-    display: inline-block;
-    background-color: transparent;
-    padding: 8px 12px 8px 16px;
-    border-radius: 8px;
-    font: var(--body-M-semibold);
-    color: var(--text-accent);
-    text-decoration: none;
-    transition: background-color 0.2s ease-in-out;
-
-    &:hover {
-        background-color: var(--surface-link);
-    }
 }
 
 /* Projects Section */
@@ -241,127 +272,46 @@ body {
 .gdd-card {
     height: 500px;
     justify-content: space-between;
-    
 }
-
 
 /* About Section */
-.about-content {
-    max-width: 800px;
+.about-content, 
+.contact-content {
+    grid-column: span 2;
 }
 
-.about-text {
-    font-size: 18px;
-    line-height: 1.7;
-    color: #555;
-    margin-bottom: 30px;
+.about-text,
+.contact-text {
+    font: var(--body-L);
+    color: var(--text-default);
+    margin-bottom: 24px;
 }
 
 .expandable-text {
-    color: #007AFF;
+    padding: 4px 8px;
+    color: var(--text-default);
+    background-color: var(--surface-link);
+    border-radius: 8px;
     cursor: pointer;
-    text-decoration: underline;
-    transition: color 0.2s ease;
-}
+    transition: all 0.2s ease-in-out;
 
-.expandable-text:hover {
-    color: #0056D1;
+    &:hover {
+        color: var(--text-accent);
+    }
 }
 
 .hidden-text {
-    color: #666;
+    display: none;
+    color: var(--text-default);
 }
 
-.resume-link {
-    color: #007AFF;
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
-}
-
-.resume-link:hover {
-    color: #0056D1;
+.typing-char {
+    position: relative;
 }
 
 /* Contact Section */
-.contact-intro {
-    font-size: 18px;
-    color: #555;
-    margin-bottom: 30px;
-}
-
 .contact-links {
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex-direction: row;
+    gap: 32px;
 }
-
-.contact-link {
-    color: #007AFF;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: color 0.2s ease;
-}
-
-.contact-link:hover {
-    color: #0056D1;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .nav-container {
-        gap: 20px;
-        flex-wrap: wrap;
-    }
-    
-    .hero {
-        padding: 100px 20px 60px;
-    }
-    
-    .hero-title {
-        font-size: 2rem;
-    }
-    
-    .section-header {
-        flex-direction: column;
-        gap: 20px;
-        align-items: flex-start;
-    }
-    
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .gdds-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    section {
-        padding: 60px 0;
-    }
-    
-    .project-card,
-    .gdd-card {
-        margin: 0 10px;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        padding: 0 15px;
-    }
-    
-    .hero {
-        padding: 80px 15px 40px;
-    }
-    
-    .nav-container {
-        padding: 0 15px;
-        gap: 15px;
-    }
-    
-    .nav-link {
-        font-size: 14px;
-    }
-} 

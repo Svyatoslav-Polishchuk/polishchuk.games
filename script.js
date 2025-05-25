@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Smooth scroll for CTA button
-    const ctaButton = document.querySelector('.cta-button');
+    const ctaButton = document.querySelector('.hero-link');
     if (ctaButton) {
         ctaButton.addEventListener('click', function(e) {
             e.preventDefault();
@@ -39,12 +39,44 @@ document.addEventListener('DOMContentLoaded', function() {
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
         
+        // Don't activate anything until user scrolls down a bit
+        const scrollThreshold = 100; // pixels
+        if (window.pageYOffset < scrollThreshold) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+            return;
+        }
+        
         let current = '';
+        const viewportTop = window.pageYOffset;
+        const viewportBottom = viewportTop + window.innerHeight;
+        
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (window.pageYOffset >= (sectionTop - 100)) {
+            const sectionBottom = sectionTop + section.clientHeight;
+            
+            // Check if section is visible in viewport
+            const isVisible = sectionTop < viewportBottom && sectionBottom > viewportTop;
+            
+            // For sections that cross the top edge (traditional behavior)
+            if (viewportTop >= (sectionTop - 100)) {
                 current = section.getAttribute('id');
+            }
+            
+            // For small sections that are visible but never cross the top
+            // Priority given to sections that are more than 50% visible
+            if (isVisible) {
+                const visibleTop = Math.max(sectionTop, viewportTop);
+                const visibleBottom = Math.min(sectionBottom, viewportBottom);
+                const visibleHeight = visibleBottom - visibleTop;
+                const sectionHeight = section.clientHeight;
+                const visibilityRatio = visibleHeight / sectionHeight;
+                
+                // If section is more than 50% visible, make it active
+                if (visibilityRatio > 0.5) {
+                    current = section.getAttribute('id');
+                }
             }
         });
 
@@ -129,6 +161,15 @@ function snapToNearestCard() {
     updateCarousel();
     updateButtonStates();
 }
+
+// Keyboard navigation
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'ArrowLeft') {
+        scrollProjects(-1);
+    } else if (e.key === 'ArrowRight') {
+        scrollProjects(1);
+    }
+});
 
 // Natural scroll and touch handling
 document.addEventListener('DOMContentLoaded', function() {
@@ -272,30 +313,17 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            entry.target.classList.add('visible');
         }
     });
 }, observerOptions);
 
 // Observe elements for animations
 document.addEventListener('DOMContentLoaded', function() {
-    const animatedElements = document.querySelectorAll('.project-card, .gdd-card, .section-title');
+    const animatedElements = document.querySelectorAll('.fade-in');
     animatedElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
-});
-
-// Keyboard navigation
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'ArrowLeft') {
-        scrollProjects(-1);
-    } else if (e.key === 'ArrowRight') {
-        scrollProjects(1);
-    }
 });
 
 // Add loading animation

@@ -20,6 +20,7 @@
     --surface-divider: #E0E2E5;
 }
 
+/* Global styles */
 * {
     margin: 0;
     padding: 0;
@@ -171,32 +172,37 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    background-color: rgba(#F5F7FA, 0.95);
-    backdrop-filter: blur(10px);
     z-index: 1000;
-    padding: 20px 0;
+    display: flex;
+    justify-content: center;
+    padding: 8px 0;
 }
 
 .nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
     display: flex;
-    justify-content: center;
-    gap: 40px;
+    flex-direction: row;
+    align-items: center;
+    background-color: rgba(var(--surface-bg), 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 99px;
+    padding: 2px;
 }
 
 .nav-link {
+    display: inline-block;
+    padding: 4px 16px;
     text-decoration: none;
-    color: #666;
-    font-weight: 400;
-    font-size: 16px;
-    transition: color 0.2s ease-in-out;
+    font: var(--body-M);
+    color: var(--text-subtle);
+    background-color: transparent;
+    border-radius: 99px;
+    transition: all 0.2s ease-in-out;
 }
 
 .nav-link:hover,
 .nav-link.active {
-    color: #333;
+    background-color: var(--surface-link);
+    color:var(--text-default);
 }
 
 /* Hero Section */
@@ -307,6 +313,18 @@ body {
 
 .typing-char {
     position: relative;
+}
+
+/* Animation classes */
+.fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 /* Contact Section */

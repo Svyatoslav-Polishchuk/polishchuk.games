@@ -59,33 +59,117 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Project navigation functionality
 let currentIndex = 0;
+let scrollAccumulator = 0;
+let scrollTimeout;
+
+function updateButtonStates() {
+    const cards = document.querySelectorAll('.project-card');
+    const prevButton = document.querySelector('.nav-arrow.prev');
+    const nextButton = document.querySelector('.nav-arrow.next');
+    
+    if (prevButton && nextButton) {
+        // Disable prev button if at start
+        if (currentIndex <= 0) {
+            prevButton.disabled = true;
+            prevButton.style.opacity = '0.3';
+            prevButton.style.cursor = 'not-allowed';
+        } else {
+            prevButton.disabled = false;
+            prevButton.style.opacity = '1';
+            prevButton.style.cursor = 'pointer';
+        }
+        
+        // Disable next button if at end
+        if (currentIndex >= cards.length - 2) {
+            nextButton.disabled = true;
+            nextButton.style.opacity = '0.3';
+            nextButton.style.cursor = 'not-allowed';
+        } else {
+            nextButton.disabled = false;
+            nextButton.style.opacity = '1';
+            nextButton.style.cursor = 'pointer';
+        }
+    }
+}
 
 function scrollProjects(direction) {
-    const projectsContainer = document.querySelector('.projects-container');
     const cards = document.querySelectorAll('.project-card');
     const totalCards = cards.length;
     
     if (direction === 1) {
-        currentIndex = Math.min(currentIndex + 1, totalCards - 1);
+        currentIndex = Math.min(currentIndex + 1, totalCards - 2);
     } else {
         currentIndex = Math.max(currentIndex - 1, 0);
     }
     
-    const targetCard = cards[currentIndex];
-    if (targetCard) {
-        targetCard.scrollIntoView({
-            behavior: 'smooth',
-            block: 'nearest',
-            inline: 'start'
-        });
-    }
+    updateCarousel();
+    updateButtonStates();
 }
 
-// Simple touch handling for mobile
+function updateCarousel() {
+    const projectsWrapper = document.querySelector('.projects-wrapper');
+    const cards = document.querySelectorAll('.project-card');
+    const cardWidth = cards[0].offsetWidth;
+    const gap = 16;
+    const translateX = -(currentIndex * (cardWidth + gap));
+    
+    projectsWrapper.style.transform = `translateX(${translateX}px)`;
+}
+
+function snapToNearestCard() {
+    const cards = document.querySelectorAll('.project-card');
+    const cardWidth = cards[0].offsetWidth + 16;
+    
+    // Calculate nearest card index
+    const targetIndex = Math.round(-scrollAccumulator / cardWidth);
+    currentIndex = Math.max(0, Math.min(targetIndex, cards.length - 2));
+    
+    // Reset accumulator and update position
+    scrollAccumulator = -(currentIndex * cardWidth);
+    updateCarousel();
+    updateButtonStates();
+}
+
+// Natural scroll and touch handling
 document.addEventListener('DOMContentLoaded', function() {
     const projectsContainer = document.querySelector('.projects-container');
     
+    // Initialize button states
+    updateButtonStates();
+    
     if (projectsContainer) {
+        // Wheel scroll handling with accumulation
+        projectsContainer.addEventListener('wheel', function(e) {
+            // Only handle horizontal scrolling
+            if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) return;
+            
+            e.preventDefault();
+            
+            const projectsWrapper = document.querySelector('.projects-wrapper');
+            const cards = document.querySelectorAll('.project-card');
+            const cardWidth = cards[0].offsetWidth + 16;
+            const maxScroll = -(cards.length - 2) * cardWidth;
+            
+            // Accumulate scroll delta
+            scrollAccumulator += -e.deltaX;
+            scrollAccumulator = Math.max(maxScroll, Math.min(0, scrollAccumulator));
+            
+            // Apply smooth transform without transition
+            projectsWrapper.style.transition = 'none';
+            projectsWrapper.style.transform = `translateX(${scrollAccumulator}px)`;
+            
+            // Clear previous timeout
+            clearTimeout(scrollTimeout);
+            
+            // Snap to nearest card after scrolling stops
+            scrollTimeout = setTimeout(() => {
+                projectsWrapper.style.transition = 'transform 0.3s ease-in-out';
+                snapToNearestCard();
+            }, 100);
+            
+        }, { passive: false });
+        
+        // Touch handling
         let touchStartX = 0;
         
         projectsContainer.addEventListener('touchstart', function(e) {
@@ -97,11 +181,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const diff = touchStartX - touchEndX;
             
             if (Math.abs(diff) > 50) {
-                if (diff > 0) {
-                    scrollProjects(1);
-                } else {
-                    scrollProjects(-1);
-                }
+                const direction = diff > 0 ? 1 : -1;
+                scrollProjects(direction);
             }
         });
     }
@@ -190,4 +271,5 @@ window.addEventListener('load', function() {
 });
 
 // Initialize
+document.body.style.opacity = '0'; 
 document.body.style.opacity = '0'; 

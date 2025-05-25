@@ -145,25 +145,13 @@ body {
 
 .projects-container {
     width: 100%;
-    overflow-x: visible;
+    overflow: visible;
 }
 
 .projects-wrapper {
     display: flex;
-    flex-direction: row;
     gap: 16px;
-    overflow-x: auto;
-    overflow-y: hidden;
-
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-    
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    &::-webkit-scrollbar {
-        display: none;
-    }
+    transition: transform 0.3s ease-out;
 }
 
 .project-card {

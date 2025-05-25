@@ -58,22 +58,54 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Project navigation functionality
+let currentIndex = 0;
+
 function scrollProjects(direction) {
-    const projectsGrid = document.querySelector('.projects-grid');
-    const scrollAmount = 400;
+    const projectsContainer = document.querySelector('.projects-container');
+    const cards = document.querySelectorAll('.project-card');
+    const totalCards = cards.length;
     
     if (direction === 1) {
-        projectsGrid.scrollBy({
-            left: scrollAmount,
-            behavior: 'smooth'
-        });
+        currentIndex = Math.min(currentIndex + 1, totalCards - 1);
     } else {
-        projectsGrid.scrollBy({
-            left: -scrollAmount,
-            behavior: 'smooth'
+        currentIndex = Math.max(currentIndex - 1, 0);
+    }
+    
+    const targetCard = cards[currentIndex];
+    if (targetCard) {
+        targetCard.scrollIntoView({
+            behavior: 'smooth',
+            block: 'nearest',
+            inline: 'start'
         });
     }
 }
+
+// Simple touch handling for mobile
+document.addEventListener('DOMContentLoaded', function() {
+    const projectsContainer = document.querySelector('.projects-container');
+    
+    if (projectsContainer) {
+        let touchStartX = 0;
+        
+        projectsContainer.addEventListener('touchstart', function(e) {
+            touchStartX = e.touches[0].clientX;
+        });
+        
+        projectsContainer.addEventListener('touchend', function(e) {
+            const touchEndX = e.changedTouches[0].clientX;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    scrollProjects(1);
+                } else {
+                    scrollProjects(-1);
+                }
+            }
+        });
+    }
+});
 
 // Expandable text functionality
 function toggleExpand(element) {

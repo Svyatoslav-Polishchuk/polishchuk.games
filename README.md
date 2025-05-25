@@ -2,15 +2,6 @@
 
 A clean, modern portfolio website for Bohdan Polishchuk, showcasing game design projects and skills.
 
-## Features
-
-- **Responsive Design**: Works perfectly on desktop, tablet, and mobile devices
-- **Smooth Scrolling**: Elegant navigation between sections
-- **Interactive Elements**: Hover effects, expandable text, and animated transitions
-- **Modern Typography**: Clean, readable Inter font family
-- **Project Showcase**: Visual project cards with newspaper-style graphics
-- **Game Design Documents**: Organized GDD section with interactive tags
-- **Contact Integration**: Direct links to LinkedIn and email
 
 ## Structure
 
@@ -43,7 +34,3 @@ Simply open `index.html` in any modern web browser. The website is fully self-co
 - CSS3 (Grid, Flexbox, Animations)
 - Vanilla JavaScript (ES6+)
 - Google Fonts (Inter)
-
----
-
-*Design inspired by modern minimalist portfolio aesthetics with clean typography and intuitive navigation.*

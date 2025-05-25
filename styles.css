@@ -4,8 +4,8 @@
 
     --body-M: 400 1rem/1.5 var(--font-family);
     --body-M-semibold: 500 1rem/1.5 var(--font-family);
-    --body-L: 400 1.25rem/1.5 var(--font-family);
-    --body-L-semibold: 500 1.25rem/1.5 var(--font-family);
+    --body-L: 400 1.25rem/1.6 var(--font-family);
+    --body-L-semibold: 500 1.25rem/1.6 var(--font-family);
     --title-M: 400 2rem/1.5 var(--font-family);
     --title-M-light: 200 2rem/1.5 var(--font-family);
 
@@ -155,17 +155,40 @@ body {
 }
 
 .project-card {
+    display: flex;
+    flex-direction: column;
     flex-shrink: 0;
     width: calc(50% - 8px);
-    padding: 32px;
-
     background: white;
     border-radius: 32px;
+    text-decoration: none;
+    overflow: hidden;
     transition: all 0.3s ease-in-out;
-
     scroll-snap-align: start;
 }
 
+.project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 32px;
+}
+
+.project-title {
+    font: var(--body-M-semibold);
+    color: var(--text-default);
+}
+
+.project-description {
+    font: var(--body-M);
+    color: var(--text-subtle);
+}
+
+.project-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
 
 /* GDDs Section */
 .gdds-grid {

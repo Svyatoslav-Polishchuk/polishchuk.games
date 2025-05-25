@@ -71,7 +71,7 @@ function updateButtonStates() {
         // Disable prev button if at start
         if (currentIndex <= 0) {
             prevButton.disabled = true;
-            prevButton.style.opacity = '0.3';
+            prevButton.style.opacity = '0.5';
             prevButton.style.cursor = 'not-allowed';
         } else {
             prevButton.disabled = false;
@@ -82,7 +82,7 @@ function updateButtonStates() {
         // Disable next button if at end
         if (currentIndex >= cards.length - 2) {
             nextButton.disabled = true;
-            nextButton.style.opacity = '0.3';
+            nextButton.style.opacity = '0.5';
             nextButton.style.cursor = 'not-allowed';
         } else {
             nextButton.disabled = false;
@@ -203,20 +203,6 @@ function toggleExpand(element) {
     }
 }
 
-// Add hover effects for project cards
-document.addEventListener('DOMContentLoaded', function() {
-    const projectCards = document.querySelectorAll('.project-card');
-    projectCards.forEach(card => {
-        card.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-8px)';
-        });
-        
-        card.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-});
-
 // Intersection Observer for fade-in animations
 const observerOptions = {
     threshold: 0.1,
@@ -243,18 +229,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Add click handlers for GDD tags
-document.addEventListener('DOMContentLoaded', function() {
-    const gddTags = document.querySelectorAll('.gdd-tag');
-    gddTags.forEach(tag => {
-        tag.addEventListener('click', function() {
-            // Add your GDD tag click functionality here
-            console.log('Clicked:', this.textContent);
-            // You can add modal opening, page navigation, or other functionality
-        });
-    });
-});
-
 // Keyboard navigation
 document.addEventListener('keydown', function(e) {
     if (e.key === 'ArrowLeft') {
@@ -271,5 +245,4 @@ window.addEventListener('load', function() {
 });
 
 // Initialize
-document.body.style.opacity = '0'; 
 document.body.style.opacity = '0'; 

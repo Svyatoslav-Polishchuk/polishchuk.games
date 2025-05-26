@@ -3,7 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bohdan Polishchuk - Game Designer</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Bohdan Polishchuk - Game Designer | Portfolio & Projects</title>
+    <meta name="description" content="Bohdan Polishchuk is a passionate game designer specialising in narrative-driven experiences, innovative mechanics, and player psychology. View my portfolio of game design projects and Game Design Documents (GDDs).">
+    <meta name="keywords" content="game designer, game design, indie games, game development, narrative design, game mechanics, player psychology, portfolio, GDD, game design document, British game designer">
+    <meta name="author" content="Bohdan Polishchuk">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://polishchuk.games">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://polishchuk.games">
+    <meta property="og:title" content="Bohdan Polishchuk - Game Designer Portfolio">
+    <meta property="og:description" content="Passionate game designer creating innovative gaming experiences. Explore my portfolio of narrative-driven games and Game Design Documents (GDDs).">
+    <meta property="og:image" content="https://polishchuk.games/images/og-image.jpg">
+    <meta property="og:site_name" content="Bohdan Polishchuk - Game Designer">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://polishchuk.games">
+    <meta property="twitter:title" content="Bohdan Polishchuk - Game Designer Portfolio">
+    <meta property="twitter:description" content="Passionate game designer creating innovative gaming experiences. Explore my portfolio of narrative-driven games and Game Design Documents (GDDs).">
+    <meta property="twitter:image" content="https://polishchuk.games/images/og-image.jpg">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Bohdan Polishchuk",
+        "jobTitle": "Game Designer",
+        "url": "https://polishchuk.games",
+        "sameAs": [
+            "https://www.linkedin.com/in/polishchuk-bohdan/"
+        ],
+        "knowsAbout": ["Game Design", "Narrative Design", "Game Mechanics", "Player Psychology", "Indie Game Development"],
+        "description": "Passionate game designer specialising in narrative-driven experiences and innovative game mechanics."
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700&display=swap" rel="stylesheet">
 </head>
@@ -24,14 +69,14 @@
                     Hi! I'm Bohdan Polishchuk,<br />
                     a young game designer with ambitions and unparalleled experience
                 </h1>
-                <a href="#about" class="hero-link accent-link">Learn more →</a>
+                <a href="#about" class="hero-link link-accent link-animation link-underline link-arrow arrow-down">Learn more</a>
             </div>
         </section>
 
         <section id="projects" class="projects">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title fade-in">Projects</h2>
+                    <h2 class="section-title">Projects</h2>
                     <div class="nav-arrow-wrapper">
                         <button class="nav-arrow prev" onclick="scrollProjects(-1)">←</button>
                         <button class="nav-arrow next" onclick="scrollProjects(1)">→</button>
@@ -40,44 +85,44 @@
                 
                 <div class="projects-container">
                     <div class="projects-wrapper">
-                        <a href="#" class="card project-card fade-in">
+                        <a href="/project/truth-agency" class="card project-card card-green" aria-label="View Truth Agency project details">
                             <div class="card-info">
-                                <h3 class="card-title">Sweet Escape →</h3>
-                                <p class="card-description">Climb high or get caught below</p>
+                                <h3 class="card-title link-animation link-arrow arrow-down-right">Truth Agency</h3>
+                                <p class="card-description">Sorting truth from fiction is your job – and your burden.</p>
                             </div>
-                            <img src="images/project-image-placeholder.png" alt="Sweet Escape" class="card-image">
+                            <img src="images/project-cover-truth-agency.png" alt="Truth Agency game cover showing investigative theme" class="card-image">
                         </a>
 
-                        <a href="#" class="card project-card fade-in">
+                        <a href="/project/winter-visit" class="card project-card card-white" aria-label="View Winter Visit project details">
                             <div class="card-info">
-                                <h3 class="card-title">Sweet Escape →</h3>
-                                <p class="card-description">Climb high or get caught below</p>
+                                <h3 class="card-title link-animation link-arrow arrow-down-right">Winter Visit</h3>
+                                <p class="card-description">Cold air. Warm memories. Heavy hearts.</p>
                             </div>
-                            <img src="images/project-image-placeholder.png" alt="Sweet Escape" class="card-image">
+                            <img src="images/project-cover-winter-visit.png" alt="Winter Visit game cover depicting emotional narrative theme" class="card-image">
                         </a>
 
-                        <a href="#" class="card project-card fade-in">
+                        <a href="/project/warforged" class="card project-card card-brown" aria-label="View WarForged project details">
                             <div class="card-info">
-                                <h3 class="card-title">Sweet Escape →</h3>
-                                <p class="card-description">Climb high or get caught below</p>
+                                <h3 class="card-title link-animation link-arrow arrow-down-right">WarForged</h3>
+                                <p class="card-description">Crafting is the journey.</p>
                             </div>
-                            <img src="images/project-image-placeholder.png" alt="Sweet Escape" class="card-image">
+                            <img src="images/project-cover-warforged.png" alt="WarForged game cover showing blacksmith crafting theme" class="card-image">
                         </a>
 
-                        <a href="#" class="card project-card fade-in">
+                        <a href="/project/sweet-escape" class="card project-card card-orange" aria-label="View Sweet Escape project details">
                             <div class="card-info">
-                                <h3 class="card-title">Sweet Escape →</h3>
-                                <p class="card-description">Climb high or get caught below</p>
+                                <h3 class="card-title link-animation link-arrow arrow-down-right">Sweet Escape</h3>
+                                <p class="card-description">Stealth is the plan. Speed is the exit.</p>
                             </div>
-                            <img src="images/project-image-placeholder.png" alt="Sweet Escape" class="card-image">
+                            <img src="images/project-cover-sweet-escape.png" alt="Sweet Escape game cover featuring stealth action gameplay" class="card-image">
                         </a>
 
-                        <a href="#" class="card project-card fade-in">
+                        <a href="/project/looking-for-beans" class="card project-card card-grey" aria-label="View Looking for Beans project details">
                             <div class="card-info">
-                                <h3 class="card-title">Sweet Escape →</h3>
-                                <p class="card-description">Climb high or get caught below</p>
+                                <h3 class="card-title link-animation link-arrow arrow-down-right">Looking for Beans</h3>
+                                <p class="card-description">Beans!</p>
                             </div>
-                            <img src="images/project-image-placeholder.png" alt="Sweet Escape" class="card-image">
+                            <img src="images/project-cover-looking-for-beans.png" alt="Looking for Beans game cover with quirky bean-hunting theme" class="card-image">
                         </a>
                     </div>
                 </div>
@@ -87,46 +132,46 @@
         <section id="gdds" class="gdds">
             <div class="container">
                 <div class="section-header">
-                    <h2 class="section-title fade-in">Game Design Documents</h2>
+                    <h2 class="section-title">Game Design Documents</h2>
                 </div>
                 
                 <div class="gdds-wrapper">
-                    <div class="card gdd-card fade-in">
+                    <div class="card gdd-card">
                         <div class="card-info">
                             <img src="images/gdd-icon-placeholder.png" alt="Icon" class="card-icon">
-                            <h3 class="card-title">Sweet Escape</h3>
-                            <p class="card-description">Some short description, up to 2 lines if possible</p>
+                            <h3 class="card-title">Truth Agency</h3>
+                            <p class="card-description">Visual deduction game inspired by "Papers, Please", where the news doesn’t always tell the truth.</p>
                         </div>
                         <div class="card-link-wrapper">
-                            <a href="" class="card-link">GDD →</a>
-                            <a href="" class="card-link">VS →</a>
-                            <a href="" class="card-link">VR →</a>
+                            <a href="" class="card-link link-animation link-arrow arrow-up-right">GDD</a>
+                            <a href="" class="card-link link-animation link-arrow arrow-up-right">VS</a>
+                            <a href="" class="card-link link-animation link-arrow arrow-up-right">VR</a>
                         </div>
                     </div>
 
-                    <div class="card gdd-card fade-in">
+                    <div class="card gdd-card">
                         <div class="card-info">
                             <img src="images/gdd-icon-placeholder.png" alt="Icon" class="card-icon">
-                            <h3 class="card-title">Sweet Escape</h3>
-                            <p class="card-description">Some short description, up to 2 lines if possible</p>
+                            <h3 class="card-title">Forest Ritual</h3>
+                            <p class="card-description">A ritualistic journey through the forest, where the player must navigate through the trees and avoid the forest spirits.</p>
                         </div>
                         <div class="card-link-wrapper">
-                            <a href="" class="card-link">GDD →</a>
-                            <a href="" class="card-link">VS →</a>
-                            <a href="" class="card-link">VR →</a>
+                            <a href="" class="card-link link-animation link-arrow arrow-up-right">GDD</a>
+                            <a href="" class="card-link link-animation link-arrow arrow-up-right">VS</a>
+                            <a href="" class="card-link link-animation link-arrow arrow-up-right">VR</a>
                         </div>
                     </div>
 
-                    <div class="card gdd-card fade-in">
+                    <div class="card gdd-card">
                         <div class="card-info">
                             <img src="images/gdd-icon-placeholder.png" alt="Icon" class="card-icon">
-                            <h3 class="card-title">Sweet Escape</h3>
-                            <p class="card-description">Some short description, up to 2 lines if possible</p>
+                            <h3 class="card-title">WarForged</h3>
+                            <p class="card-description">Blacksmith shop management game with a reimagined crafting system.</p>
                         </div>
                         <div class="card-link-wrapper">
-                            <a href="" class="card-link">GDD →</a>
-                            <a href="" class="card-link">VS →</a>
-                            <a href="" class="card-link">VR →</a>
+                            <a href="" class="card-link link-animation link-arrow arrow-up-right">GDD</a>
+                            <a href="" class="card-link link-animation link-arrow arrow-up-right">VS</a>
+                            <a href="" class="card-link link-animation link-arrow arrow-up-right">VR</a>
                         </div>
                     </div>
                 </div>
@@ -135,26 +180,26 @@
 
         <section id="about" class="about">
             <div class="container columns">
-                <h2 class="section-title fade-in">About</h2>
+                <h2 class="section-title">About</h2>
                 <div class="about-content">
-                    <p class="about-text fade-in">
+                    <p class="about-text">
                         Here goes some text with click-to-disclose story. At the end of each sentence there is a
                         <span class="expandable-text" onclick="toggleExpand(this)">link</span><span class="hidden-text">the expanded content that was hidden before</span>. It reveals an additional sentence on 
                         <span class="expandable-text" onclick="toggleExpand(this)">click</span><span class="hidden-text">every time you click on the link, the hidden text will be revealed</span>.
                     </p>
-                    <a href="#" class="resume-link accent-link fade-in">My resume →</a>
+                    <a href="files/resume-bohdan-polishchuk.pdf" download="resume-bohdan-polishchuk.pdf" target="_blank" class="link-accent link-animation link-underline link-arrow arrow-down">Download my resume</a>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="contact">
             <div class="container columns">
-                <h2 class="section-title fade-in">Contact</h2>
+                <h2 class="section-title">Contact</h2>
                 <div class="contact-content">
-                    <p class="contact-text fade-in">Message me about a new position. Or about a new game you're working on. Or about something cool you've seen recently. In any case, message me to say hello, I'm all ears.</p>
-                    <div class="contact-links fade-in">
-                        <a href="https://linkedin.com/in/bohdan-polishchuk" class="contact-link accent-link">LinkedIn →</a>
-                        <a href="mailto:bohdan@gmail.com" class="contact-link accent-link">bohdan@gmail.com →</a>
+                    <p class="contact-text">Got a game that needs some design magic? Or maybe you want to argue about whether RNG is the devil while brainstorming the next indie hit? In either case, drop me a line – I promise I'm more fun than my resume suggests.</p>
+                    <div class="contact-links">
+                        <a href="https://www.linkedin.com/in/polishchuk-bohdan/" target="_blank" rel="noopener" class="link-accent link-animation link-underline link-arrow arrow-up-right" aria-label="Visit Bohdan Polishchuk's LinkedIn profile">LinkedIn</a>
+                        <a href="mailto:bohdan.polishchuk2000@gmail.com" class="link-accent link-animation link-underline link-arrow arrow-up-right" aria-label="Send email to Bohdan Polishchuk">bohdan.polishchuk2000@gmail.com</a>
                     </div>
                 </div>
             </div>

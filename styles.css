@@ -292,6 +292,12 @@ body {
     flex-shrink: 0;
     width: calc(50% - 8px);
     scroll-snap-align: start;
+
+    &.card-green {background-color: #ECF0E9;}
+    &.card-white {background-color: #EBF1F5;}
+    &.card-brown {background-color: #F2ECE6;}
+    &.card-orange {background-color: #EDECE6;}
+    &.card-grey {background-color: #EBEEF0;}
 }
 
 /* GDDs Section */

@@ -114,13 +114,13 @@ body {
 .card-link-wrapper {
     display: flex;
     flex-direction: column;
-    padding: 32px;
+    padding: 16px;
 }
 
 .card-link {
     width: 100%;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--surface-divider);
+    padding: 12px 16px;
+    border-radius: 16px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -130,9 +130,22 @@ body {
     text-decoration: none;
     transition: all 0.2s ease-in-out;
 
-    &:last-child {
-        padding-bottom: 0;
-        border-bottom: none;
+    &:hover {
+        color: var(--text-accent);
+    }
+
+    &::before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 16px;
+        width: calc(100% - 32px);
+        height: 1px;
+        background-color: var(--surface-divider);
+    }
+
+    &:last-child::before {
+        display: none;
     }
 }
 

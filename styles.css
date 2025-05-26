@@ -104,6 +104,11 @@ body {
     width: 100%;
     height: auto;
     object-fit: cover;
+    transition: transform 0.4s ease-in-out;
+}
+
+.card:hover .card-image {
+    transform: scale(1.05) rotate(-2deg);
 }
 
 .card-link-wrapper {

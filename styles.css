@@ -326,8 +326,13 @@ body {
 }
 
 .gdd-card {
+    flex: 1 0;
     height: 500px;
     justify-content: space-between;
+}
+
+.gdd-card:hover {
+    transform: translateY(-4px);
 }
 
 /* About Section */

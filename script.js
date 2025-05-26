@@ -87,41 +87,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-
-    // Email protection - construct email dynamically to avoid spam bots
-    const emailElement = document.getElementById('email-link');
-    if (emailElement) {
-        // Obfuscated email parts
-        const user = 'bohdan.polishchuk2000';
-        const domain = 'gmail';
-        const tld = 'com';
-        const email = user + '@' + domain + '.' + tld;
-        
-        // Set the email content and make it clickable
-        emailElement.textContent = email;
-        emailElement.style.userSelect = 'text'; // Make text selectable
-        emailElement.style.webkitUserSelect = 'text'; // Safari support
-        
-        emailElement.addEventListener('click', function(e) {
-            // Only trigger mailto if user isn't selecting text
-            const selection = window.getSelection();
-            if (selection.toString().length === 0) {
-                window.location.href = 'mailto:' + email;
-            }
-        });
-        
-        // Prevent mailto when user is selecting text
-        emailElement.addEventListener('mousedown', function(e) {
-            emailElement.setAttribute('data-selecting', 'false');
-        });
-        
-        emailElement.addEventListener('mouseup', function(e) {
-            const selection = window.getSelection();
-            if (selection.toString().length > 0) {
-                emailElement.setAttribute('data-selecting', 'true');
-            }
-        });
-    }
 });
 
 // Project navigation functionality

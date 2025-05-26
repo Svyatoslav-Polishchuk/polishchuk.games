@@ -242,7 +242,8 @@ main {
     transform: rotate(-45deg);
 }
 
-.arrow-down-right:hover::after {
+.arrow-down-right:hover::after,
+.project-card:hover .arrow-down-right::after {
     transform: rotate(45deg);
 }
 

@@ -139,76 +139,97 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // Expandable text functionality
-function toggleExpand(element) {
-    const hiddenText = element.nextElementSibling;
+// function toggleExpand(element, targetId) {
+//     const hiddenText = document.getElementById(targetId);
     
-    if (hiddenText && hiddenText.classList.contains('hidden-text')) {
-        // Hide the clicked expandable element
-        element.style.display = 'none';
+//     // Check if already expanded
+//     if (element.classList.contains('expanded')) {
+//         return;
+//     }
+    
+//     if (hiddenText && hiddenText.classList.contains('hidden-text')) {
+//         // Mark as expanded
+//         element.classList.add('expanded');
+//         element.onclick = null;
+//         element.style.cursor = 'default';
+//         element.style.textDecoration = 'none';
+//         element.classList.remove('expandable-text');
         
-        // Show the hidden text with typing animation
-        hiddenText.style.display = 'inline';
+//         // Show the element
+//         hiddenText.style.display = 'inline';
         
-        // Get the full text content
-        const fullText = hiddenText.textContent;
+//         // Animate only direct text nodes, leave nested elements alone
+//         animateDirectTextOnly(hiddenText);
+//     }
+// }
+
+// // Get only the direct text content, ignoring nested elements
+// function getDirectTextContent(element) {
+//     let directText = '';
+    
+//     for (let node of element.childNodes) {
+//         if (node.nodeType === Node.TEXT_NODE) {
+//             directText += node.textContent;
+//         }
+//     }
+    
+//     return directText;
+// }
+
+// function animateDirectTextOnly(element) {
+//     // Find and animate only direct text nodes
+//     const walker = document.createTreeWalker(
+//         element,
+//         NodeFilter.SHOW_TEXT,
+//         {
+//             acceptNode: function(node) {
+//                 // Only accept direct children text nodes
+//                 return node.parentNode === element ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+//             }
+//         }
+//     );
+    
+//     const textNodes = [];
+//     let node;
+//     while (node = walker.nextNode()) {
+//         if (node.textContent.trim()) {
+//             textNodes.push(node);
+//         }
+//     }
+    
+//     // Animate each direct text node
+//     textNodes.forEach(textNode => {
+//         const text = textNode.textContent;
+//         const container = document.createElement('span');
+//         textNode.parentNode.replaceChild(container, textNode);
         
-        // Clear the text and start typing animation
-        hiddenText.innerHTML = '';
+//         let charIndex = 0;
         
-        // Natural typing animation with variable speeds
-        let i = 0;
-        
-        function getTypingDelay(char, nextChar) {
-            const baseSpeed = 40; // Base typing speed
-            const variation = Math.random() * 30; // Random variation (0-30ms)
-            
-            // Longer pauses for punctuation
-            if (char === '.' || char === '!' || char === '?') {
-                return baseSpeed + variation + 200;
-            }
-            if (char === ',' || char === ';') {
-                return baseSpeed + variation + 100;
-            }
-            if (char === ' ') {
-                return baseSpeed + variation + 20;
-            }
-            
-            // Slightly faster for common letter combinations
-            const commonPairs = ['th', 'he', 'in', 'er', 'an', 're', 'ed', 'nd', 'ou', 'ea'];
-            const currentPair = char + (nextChar || '');
-            if (commonPairs.includes(currentPair.toLowerCase())) {
-                return Math.max(15, baseSpeed + variation - 15);
-            }
-            
-            return baseSpeed + variation;
-        }
-        
-        function typeCharacter() {
-            if (i < fullText.length) {
-                const currentChar = fullText.charAt(i);
-                const nextChar = fullText.charAt(i + 1);
+//         function typeChar() {
+//             if (charIndex < text.length) {
+//                 const char = text[charIndex];
+//                 const span = document.createElement('span');
+//                 span.textContent = char;
+//                 span.style.color = '#999';
+//                 span.style.transition = 'color 0.8s ease-in-out';
                 
-                // Create a span for the new character with grey color
-                const charSpan = document.createElement('span');
-                charSpan.textContent = currentChar;
-                charSpan.style.color = '#999';
-                charSpan.style.transition = 'color 0.8s ease-in-out';
-                charSpan.classList.add('typing-char');
+//                 container.appendChild(span);
                 
-                hiddenText.appendChild(charSpan);
+//                 setTimeout(() => {
+//                     span.style.color = 'var(--text-default)';
+//                 }, 300 + Math.random() * 200);
                 
-                // Fade to black after a delay
-                setTimeout(() => {
-                    charSpan.style.color = 'var(--text-default)';
-                }, 300 + Math.random() * 200); // Random delay between 300-500ms
+//                 charIndex++;
                 
-                const delay = getTypingDelay(currentChar, nextChar);
-                i++;
-                setTimeout(typeCharacter, delay);
-            }
-        }
+//                 let delay = 40 + Math.random() * 30;
+//                 if (char === '.' || char === '!' || char === '?') delay += 200;
+//                 else if (char === ',' || char === ';') delay += 100;
+//                 else if (char === ' ') delay += 20;
+                
+//                 setTimeout(typeChar, delay);
+//             }
+//         }
         
-        // Start typing after a small delay
-        setTimeout(typeCharacter, 150);
-    }
-}
+//         setTimeout(typeChar, 150);
+//     });
+// }

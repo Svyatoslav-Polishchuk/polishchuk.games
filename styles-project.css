@@ -45,16 +45,28 @@
 }
 
 /* Hero Section */
+.hero .container {
+    margin-bottom: 0;
+}
+
+.hero .column-content {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    margin-top: 52px;
+    padding: 64px 0;
+
+    @media (max-width: 768px) {
+        margin-top: 0;
+    }
+}
+
 .hero-content {
-    max-width: 560px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 128px 0;
-    margin-top: 52px;
-    margin-bottom: 0;
+    padding: 64px 0;
 }
 
 .hero-title {
@@ -87,7 +99,7 @@
     @media (max-width: 768px) {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        padding: 8px;
+        padding: 0;
     }
 }
 
@@ -104,7 +116,7 @@
     }
 
     @media (max-width: 768px) {
-        padding: 8px;
+        padding: 16px;
 
         &:nth-child(1),
         &:nth-child(3) {
@@ -327,6 +339,16 @@
 }
 
 /* TODO: Design Process Section */
+
+.documentation-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    a {
+        width: fit-content;
+    }
+}
 
 /* Reflection Section */
 .reflection-content {

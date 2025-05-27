@@ -27,6 +27,12 @@
     <meta property="twitter:description" content="Passionate game designer creating innovative gaming experiences. Explore my portfolio of narrative-driven games and Game Design Documents (GDDs).">
     <meta property="twitter:image" content="https://polishchuk.games/images/og-image.jpg">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
     <!-- Structured Data -->
     <script type="application/ld+json">
     {
@@ -43,13 +49,8 @@
     }
     </script>
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles-home.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -65,10 +66,8 @@
     <main>
         <section id="home" class="hero">
             <div class="container hero-content">
-                <h1 class="hero-title">
-                    Hi! I'm Bohdan Polishchuk,<br />
-                    a young game designer with ambitions and unparalleled experience
-                </h1>
+                <h1 class="hero-title">Hi! I'm Bohdan Polishchuk,</h1>
+                <p class="hero-subtitle">a young game designer with ambitions and unparalleled experience</p>
                 <a href="#about" class="hero-link link-accent link-animation link-underline link-arrow arrow-down">Learn more</a>
             </div>
         </section>
@@ -77,9 +76,9 @@
             <div class="container">
                 <div class="section-header">
                     <h2 class="section-title">Projects</h2>
-                    <div class="nav-arrow-wrapper">
-                        <button class="nav-arrow prev" onclick="scrollProjects(-1)">←</button>
-                        <button class="nav-arrow next" onclick="scrollProjects(1)">→</button>
+                    <div class="carousel-button-wrapper">
+                        <button class="carousel-button prev" onclick="scrollProjects(-1)">←</button>
+                        <button class="carousel-button next" onclick="scrollProjects(1)">→</button>
                     </div>
                 </div>
                 
@@ -181,7 +180,7 @@
         <section id="about" class="about">
             <div class="container columns">
                 <h2 class="section-title">About</h2>
-                <div class="about-content">
+                <div class="column-content">
                     <p class="about-text">
                         Here goes some text with click-to-disclose story. At the end of each sentence there is a
                         <span class="expandable-text" onclick="toggleExpand(this)">link</span><span class="hidden-text">the expanded content that was hidden before</span>. It reveals an additional sentence on 
@@ -195,7 +194,7 @@
         <section id="contact" class="contact">
             <div class="container columns">
                 <h2 class="section-title">Contact</h2>
-                <div class="contact-content">
+                <div class="column-content">
                     <p class="contact-text">Got a game that needs some design magic? Or maybe you want to argue about whether RNG is the devil while brainstorming the next indie hit? In either case, drop me a line – I promise I'm more fun than my resume suggests.</p>
                     <div class="contact-links">
                         <a href="https://www.linkedin.com/in/polishchuk-bohdan/" target="_blank" rel="noopener" class="link-accent link-animation link-underline link-arrow arrow-up-right" aria-label="Visit Bohdan Polishchuk's LinkedIn profile">LinkedIn</a>
@@ -207,5 +206,6 @@
     </main>
 
     <script src="script.js"></script>
+    <script src="script-home.js"></script>
 </body>
 </html> 

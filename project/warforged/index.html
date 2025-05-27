@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>WarForged - Game Design Case Study | Bohdan Polishchuk</title>
+    <meta name="description" content="WarForged case study: A blacksmith shop management game with reimagined crafting mechanics. Explore the design process and innovations behind this student project.">
+    <meta name="keywords" content="WarForged, game design, case study, blacksmith game, crafting mechanics, student project, portfolio">
+    <meta name="author" content="Bohdan Polishchuk">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://polishchuk.games/project/warforged">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://polishchuk.games/project/warforged">
+    <meta property="og:title" content="WarForged - Game Design Case Study | Bohdan Polishchuk">
+    <meta property="og:description" content="Explore the design process behind WarForged, a blacksmith shop management game with innovative crafting mechanics.">
+    <meta property="og:image" content="https://polishchuk.games/images/warforged-og-image.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://polishchuk.games/project/warforged">
+    <meta property="twitter:title" content="WarForged - Game Design Case Study | Bohdan Polishchuk">
+    <meta property="twitter:description" content="Explore the design process behind WarForged, a blacksmith shop management game with innovative crafting mechanics.">
+    <meta property="twitter:image" content="https://polishchuk.games/images/warforged-og-image.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    
+    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="styles-warforged.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#overview" class="nav-link">Overview</a>
+            <a href="#screenshots" class="nav-link">Screenshots</a>
+            <a href="#mechanics" class="nav-link">Mechanics</a>
+            <a href="#process" class="nav-link">Process</a>
+            <a href="#challenges" class="nav-link">Challenges</a>
+            <a href="#reflection" class="nav-link">Reflection</a>
+        </div>
+    </nav>
+
+    <!-- Back to Projects Link -->
+    <div class="back-link-container">
+        <a href="../../#projects" class="back-link">← Projects</a>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-background">
+                <div class="particles"></div>
+            </div>
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title" id="heroTitle">WarForged</h1>
+                    <p class="hero-subtitle">Crafting is the journey.</p>
+                    <p class="hero-description">A blacksmith shop management game that reimagines crafting mechanics through meaningful player choice and resource scarcity.</p>
+                    <div class="hero-meta">
+                        <span class="meta-item">Role: Game Designer</span>
+                        <span class="meta-item">Duration: 6 months</span>
+                        <span class="meta-item">Platform: PC</span>
+                        <span class="meta-item">Team: Solo project</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Walkthrough -->
+        <section class="video-section">
+            <div class="container">
+                <h2 class="section-title">Game Walkthrough</h2>
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                        title="WarForged - Game Walkthrough" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- Project Overview -->
+        <section class="overview" id="overview">
+            <div class="container">
+                <h2 class="section-title">Overview</h2>
+                <div class="overview-content">
+                    <div class="overview-text">
+                        <p>Traditional crafting systems in games often feel repetitive and lack meaningful choice. Players typically follow optimal paths, reducing crafting to a mechanical grind rather than an engaging creative process.</p>
+                        <p>WarForged introduces a dynamic crafting system where every decision matters. The "Forge Memory" system remembers how items were crafted, affecting their properties and creating long-term consequences for short-term decisions.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Screenshots -->
+        <section class="screenshots" id="screenshots">
+            <div class="container">
+                <h2 class="section-title">Visual Design</h2>
+                <div class="carousel-container">
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track" id="screenshotCarousel">
+                            <div class="carousel-slide active">
+                                <img src="images/screenshot-forge-interface.png" alt="Main forge interface showing crafting in progress" class="carousel-image">
+                                <div class="carousel-caption">
+                                    <h4>Forge Interface</h4>
+                                    <p>The main crafting interface emphasizes the tactile nature of blacksmithing with intuitive controls and visual feedback.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="images/screenshot-customer-interaction.png" alt="Customer interaction showing commission details" class="carousel-image">
+                                <div class="carousel-caption">
+                                    <h4>Customer Interactions</h4>
+                                    <p>Rich dialogue system that reveals customer stories and builds emotional investment in each commission.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="images/screenshot-resource-management.png" alt="Resource management screen with material quality indicators" class="carousel-image">
+                                <div class="carousel-caption">
+                                    <h4>Resource Management</h4>
+                                    <p>Detailed material system showing quality, origin, and potential uses for strategic planning.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="images/screenshot-forge-memory.png" alt="Forge Memory system showing item history" class="carousel-image">
+                                <div class="carousel-caption">
+                                    <h4>Forge Memory</h4>
+                                    <p>Items display their crafting history, showing how player decisions create lasting consequences.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-controls">
+                        <button class="carousel-btn prev" onclick="changeSlide(-1)">‹</button>
+                        <div class="carousel-indicators">
+                            <span class="indicator active" onclick="currentSlide(1)"></span>
+                            <span class="indicator" onclick="currentSlide(2)"></span>
+                            <span class="indicator" onclick="currentSlide(3)"></span>
+                            <span class="indicator" onclick="currentSlide(4)"></span>
+                        </div>
+                        <button class="carousel-btn next" onclick="changeSlide(1)">›</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Mechanics -->
+        <section class="mechanics" id="mechanics">
+            <div class="container">
+                <h2 class="section-title">Core Mechanics</h2>
+                <div class="mechanics-grid">
+                    <div class="mechanic-card">
+                        <h3>Forge Memory System</h3>
+                        <p>Every item remembers how it was made. Rush a sword and it might break in battle. Take time with a wedding ring and it becomes a family heirloom. This system creates long-term consequences for immediate decisions.</p>
+                    </div>
+                    <div class="mechanic-card">
+                        <h3>Dynamic Resource Scarcity</h3>
+                        <p>Materials aren't just numbers in an inventory. Each piece of metal has a story, and scarcity forces meaningful trade-offs between current needs and future opportunities.</p>
+                    </div>
+                    <div class="mechanic-card">
+                        <h3>Customer Story System</h3>
+                        <p>Each commission comes with a story. A farmer needs a plow before harvest season. A knight requires armor for an upcoming battle. These narratives drive urgency and emotional investment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Design Process -->
+        <section class="process" id="process">
+            <div class="container">
+                <h2 class="section-title">Design Process</h2>
+                <div class="process-grid">
+                    <div class="process-step">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h3>Research & Ideation</h3>
+                            <p>Analyzed existing crafting systems in games like Minecraft, Skyrim, and Stardew Valley. Identified pain points: repetitive mechanics, lack of meaningful choice, and disconnection from narrative.</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h3>Prototyping</h3>
+                            <p>Created paper prototypes to test core mechanics. Focused on the Forge Memory system and resource scarcity. Iterated rapidly based on feedback and playtesting sessions.</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h3>Digital Implementation</h3>
+                            <p>Built a functional prototype focusing on the crafting interface and Forge Memory system. Conducted playtests to refine mechanics and balance difficulty.</p>
+                        </div>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <h3>Refinement</h3>
+                            <p>Refined UI/UX based on user feedback. Balanced progression systems and added narrative elements to enhance the customer story system.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Challenges & Solutions -->
+        <section class="challenges" id="challenges">
+            <div class="container">
+                <h2 class="section-title">Challenges & Solutions</h2>
+                <div class="challenges-grid">
+                    <div class="challenge-card">
+                        <h3>Complexity vs. Accessibility</h3>
+                        <p><strong>Problem:</strong> The Forge Memory system was initially too complex, overwhelming new players while not providing enough depth for experienced ones.</p>
+                        <p><strong>Solution:</strong> Implemented a progressive disclosure system. Basic memory traits are introduced first, with advanced interactions unlocked as players gain experience.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <h3>Balancing Scarcity</h3>
+                        <p><strong>Problem:</strong> Resource scarcity was either too punishing (causing frustration) or too lenient (removing meaningful choice).</p>
+                        <p><strong>Solution:</strong> Created a dynamic scarcity system that adjusts based on player behavior. Added multiple resource acquisition paths to give players agency.</p>
+                    </div>
+                    <div class="challenge-card">
+                        <h3>Emotional Investment</h3>
+                        <p><strong>Problem:</strong> Players weren't forming emotional connections with customer stories, treating them as generic fetch quests.</p>
+                        <p><strong>Solution:</strong> Redesigned the customer system to show consequences of player choices. Added follow-up visits where customers share how items affected their lives.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Reflection -->
+        <section class="reflection" id="reflection">
+            <div class="container">
+                <h2 class="section-title">Reflection</h2>
+                <div class="reflection-content">
+                    <div class="reflection-section">
+                        <h3>What I Learned</h3>
+                        <ul>
+                            <li>Progressive disclosure is crucial for complex systems - introducing complexity gradually allows players to appreciate depth without feeling overwhelmed</li>
+                            <li>Emotional hooks matter more than mechanical optimization - connecting mechanics to stories created genuine player investment</li>
+                            <li>Paper prototyping saves time - testing core mechanics on paper prevented weeks of development iteration</li>
+                            <li>Player agency drives satisfaction - giving multiple paths to success increased enjoyment even when players chose suboptimal routes</li>
+                        </ul>
+                    </div>
+                    <div class="reflection-section">
+                        <h3>What I'd Do Differently</h3>
+                        <ul>
+                            <li>Include diverse players in testing from the start - initial playtests skewed toward experienced gamers and missed casual player pain points</li>
+                            <li>Consider technical constraints earlier - better communication about system complexity could have prevented late-stage scope cuts</li>
+                            <li>Focus on accessibility from day one - accessibility features should be designed in, not added later</li>
+                            <li>Document decisions better - keeping a design journal would have helped track why certain choices were made</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Related Projects -->
+        <section class="related">
+            <div class="container">
+                <h2 class="section-title">Other Projects</h2>
+                <div class="related-grid">
+                    <a href="../truth-agency" class="card project-card card-green">
+                        <div class="card-info">
+                            <h3 class="card-title link-animation link-arrow arrow-down-right">Truth Agency</h3>
+                            <p class="card-description">Sorting truth from fiction is your job – and your burden.</p>
+                        </div>
+                        <img src="../../images/project-cover-truth-agency.png" alt="Truth Agency game cover" class="card-image">
+                    </a>
+                    <a href="../winter-visit" class="card project-card card-white">
+                        <div class="card-info">
+                            <h3 class="card-title link-animation link-arrow arrow-down-right">Winter Visit</h3>
+                            <p class="card-description">Cold air. Warm memories. Heavy hearts.</p>
+                        </div>
+                        <img src="../../images/project-cover-winter-visit.png" alt="Winter Visit game cover" class="card-image">
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="../../script.js"></script>
+    <script src="script-warforged.js"></script>
+</body>
+</html> 

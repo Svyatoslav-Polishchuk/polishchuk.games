@@ -99,7 +99,7 @@
     @media (max-width: 768px) {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        padding: 8px;
+        padding: 0;
     }
 }
 
@@ -116,7 +116,7 @@
     }
 
     @media (max-width: 768px) {
-        padding: 8px;
+        padding: 16px;
 
         &:nth-child(1),
         &:nth-child(3) {
@@ -339,6 +339,16 @@
 }
 
 /* TODO: Design Process Section */
+
+.documentation-content {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    a {
+        width: fit-content;
+    }
+}
 
 /* Reflection Section */
 .reflection-content {

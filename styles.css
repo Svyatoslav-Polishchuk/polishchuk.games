@@ -211,7 +211,7 @@ main {
     position: absolute;
     bottom: -2px;
     left: 0;
-    width: calc(100% - 20px); /* Subtract approximate width of arrow + margin */
+    width: calc(100% - 20px);
     height: 1px;
     background-color: var(--text-accent-hover);
     transform: scaleX(0);
@@ -288,7 +288,7 @@ main {
 .nav-link:hover,
 .nav-link.active {
     background-color: var(--surface-link);
-    color:var(--text-default);
+    color: var(--text-default);
 }
 
 /* Hero Section */
@@ -367,11 +367,25 @@ main {
     width: calc(50% - 8px);
     scroll-snap-align: start;
 
-    &.card-green {background-color: #ECF0E9;}
-    &.card-white {background-color: #EBF1F5;}
-    &.card-brown {background-color: #F2ECE6;}
-    &.card-orange {background-color: #EDECE6;}
-    &.card-grey {background-color: #EBEEF0;}
+    &.card-green {
+        background-color: #ECF0E9;
+    }
+
+    &.card-white {
+        background-color: #EBF1F5;
+    }
+
+    &.card-brown {
+        background-color: #F2ECE6;
+    }
+
+    &.card-orange {
+        background-color: #EDECE6;
+    }
+
+    &.card-grey {
+        background-color: #EBEEF0;
+    }
 
     @media (max-width: 768px) {
         width: 100%;
@@ -406,7 +420,7 @@ main {
 }
 
 /* About Section */
-.about-content, 
+.about-content,
 .contact-content {
     grid-column: span 2;
 

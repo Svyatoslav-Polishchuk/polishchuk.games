@@ -121,6 +121,7 @@
 
 .expandable-text {
     padding: 4px 8px;
+    /* margin: 0 -8px; */
     color: var(--text-default);
     background-color: var(--surface-link);
     border-radius: 8px;

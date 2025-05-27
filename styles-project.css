@@ -45,16 +45,28 @@
 }
 
 /* Hero Section */
+.hero .container {
+    margin-bottom: 0;
+}
+
+.hero .column-content {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    margin-top: 52px;
+    padding: 64px 0;
+
+    @media (max-width: 768px) {
+        margin-top: 0;
+    }
+}
+
 .hero-content {
-    max-width: 560px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 128px 0;
-    margin-top: 52px;
-    margin-bottom: 0;
+    padding: 64px 0;
 }
 
 .hero-title {

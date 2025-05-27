@@ -1,5 +1,3 @@
-/* WarForged Case Study - Minimalistic Styles */
-
 /* Back to Projects Link */
 .backlink {
     position: fixed;
@@ -77,6 +75,7 @@
     color: var(--text-default);
     margin-bottom: 24px;
 }
+
 .meta-wrapper {
     display: flex;
     flex-direction: row;
@@ -84,6 +83,12 @@
     border-radius: 16px;
     padding: 16px 0;
     margin-bottom: 24px;
+
+    @media (max-width: 768px) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 8px;
+    }
 }
 
 .meta-item {
@@ -96,6 +101,25 @@
 
     &:last-child {
         border-right: none;
+    }
+
+    @media (max-width: 768px) {
+        padding: 8px;
+
+        &:nth-child(1),
+        &:nth-child(3) {
+            border-right: 1px solid var(--surface-divider);
+        }
+
+        &:nth-child(2),
+        &:nth-child(4) {
+            border-right: none;
+        }
+
+        &:nth-child(1),
+        &:nth-child(2) {
+            border-bottom: 1px solid var(--surface-divider);
+        }
     }
 }
 
@@ -117,6 +141,10 @@
     aspect-ratio: 16/9;
     border-radius: 32px;
     overflow: hidden;
+
+    @media (max-width: 768px) {
+        border-radius: 16px;
+    }
 }
 
 .video-wrapper iframe {
@@ -131,10 +159,15 @@
 .carousel {
     position: relative;
     width: 100%;
-    height: 680px;
+    max-height: 680px;
     overflow: hidden;
     border-radius: 32px;
     background-color: #000;
+
+    @media (max-width: 768px) {
+        border-radius: 16px;
+        max-height: 480px;
+    }
 }
 
 .carousel-slide {
@@ -167,8 +200,12 @@
     left: 0;
     right: 0;
     background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
-    padding: 2rem;
+    padding: 32px;
     color: white;
+
+    @media (max-width: 768px) {
+        padding: 16px;
+    }
 }
 
 .carousel-caption h4 {
@@ -189,12 +226,20 @@
     align-items: center;
     margin-top: 24px;
     gap: 24px;
+
+    @media (max-width: 768px) {
+        gap: 12px;
+    }
 }
 
 .carousel-nav {
     display: flex;
     justify-content: center;
     gap: 8px;
+
+    @media (max-width: 768px) {
+        gap: 2px;
+    }
 }
 
 .carousel-nav-button {
@@ -226,6 +271,10 @@
     display: flex;
     flex-direction: row;
     gap: 16px;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 }
 
 .mechanic-card,
@@ -235,6 +284,10 @@
 
     &:hover {
         transform: translateY(-4px);
+    }
+
+    @media (max-width: 768px) {
+        padding: 16px;
     }
 }
 
@@ -253,6 +306,10 @@
 
     &:first-of-type {
         min-height: 192px;
+
+        @media (max-width: 768px) {
+            min-height: auto;
+        }
     }
 
     &:last-of-type::before {
@@ -308,6 +365,10 @@
     display: flex;
     flex-direction: row;
     gap: 16px;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
 }
 
 /* Contact Section */

@@ -25,6 +25,7 @@
         --body-L-semibold: 500 1.125rem/1.6 var(--font-family);
         --title-S: 400 1.5rem/1.5 var(--font-family);
         --title-M: 400 1.5rem/1.5 var(--font-family);
+        --title-L: 600 2.5rem/1.5 var(--font-family);
     }
 }
 

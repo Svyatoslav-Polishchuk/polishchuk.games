@@ -1,0 +1,390 @@
+/* Back to Projects Link */
+.backlink {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 8px 0;
+    z-index: 1000;
+}
+
+.backlink-container {
+    display: flex;
+    align-items: center;
+    padding: 2px;
+    background-color: rgba(var(--surface-bg), 0.95);
+    backdrop-filter: blur(10px);
+    border-radius: 99px;
+}
+
+.backlink-link {
+    display: inline-block;
+    align-items: center;
+    padding: 4px 16px 4px 12px;
+    font: var(--body-M);
+    color: var(--text-subtle);
+    background-color: transparent;
+    border-radius: 99px;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        background-color: var(--surface-link);
+        color: var(--text-default);
+    }
+}
+
+.backlink-link::before {
+    content: '←';
+    margin-right: 8px;
+}
+
+.nav-container {
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
+
+/* Hero Section */
+.hero-content {
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 128px 0;
+    margin-top: 52px;
+    margin-bottom: 0;
+}
+
+.hero-title {
+    font: var(--title-L);
+    color: var(--text-default);
+    letter-spacing: -0.02em;
+    margin-bottom: 8px;
+}
+
+.hero-subtitle {
+    font: var(--body-L);
+    color: var(--text-subtle);
+}
+
+/* Overview Section */
+.overview p {
+    font: var(--body-L);
+    color: var(--text-default);
+    margin-bottom: 24px;
+}
+
+.meta-wrapper {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--surface-card);
+    border-radius: 16px;
+    padding: 16px 0;
+    margin-bottom: 24px;
+
+    @media (max-width: 768px) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        padding: 8px;
+    }
+}
+
+.meta-item {
+    flex: 1 0;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 0 16px;
+    border-right: 1px solid var(--surface-divider);
+
+    &:last-child {
+        border-right: none;
+    }
+
+    @media (max-width: 768px) {
+        padding: 8px;
+
+        &:nth-child(1),
+        &:nth-child(3) {
+            border-right: 1px solid var(--surface-divider);
+        }
+
+        &:nth-child(2),
+        &:nth-child(4) {
+            border-right: none;
+        }
+
+        &:nth-child(1),
+        &:nth-child(2) {
+            border-bottom: 1px solid var(--surface-divider);
+        }
+    }
+}
+
+.meta-item-label {
+    font: var(--body-M);
+    color: var(--text-subtle);
+}
+
+.meta-item-value {
+    font: var(--body-M);
+    color: var(--text-default);
+}
+
+
+/* Video Section */
+.video-wrapper {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 32px;
+    overflow: hidden;
+
+    @media (max-width: 768px) {
+        border-radius: 16px;
+    }
+}
+
+.video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Screenshots Section*/
+.carousel {
+    position: relative;
+    width: 100%;
+    max-height: 680px;
+    overflow: hidden;
+    border-radius: 32px;
+    background-color: #000;
+
+    @media (max-width: 768px) {
+        border-radius: 16px;
+        max-height: 480px;
+    }
+}
+
+.carousel-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-slide.active {
+    opacity: 1;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.carousel-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+    padding: 32px;
+    color: white;
+
+    @media (max-width: 768px) {
+        padding: 16px;
+    }
+}
+
+.carousel-caption h4 {
+    font: var(--body-L-semibold);
+    color: white;
+    margin-bottom: 8px;
+}
+
+.carousel-caption p {
+    font: var(--body-M);
+    color: white;
+}
+
+.carousel-nav-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 24px;
+    gap: 24px;
+
+    @media (max-width: 768px) {
+        gap: 12px;
+    }
+}
+
+.carousel-nav {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+
+    @media (max-width: 768px) {
+        gap: 2px;
+    }
+}
+
+.carousel-nav-button {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border-radius: 8px;
+    font: var(--body-M);
+    color: var(--text-subtle);
+    border: none;
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover,
+    &:focus,
+    &.active {
+        color: var(--text-default);
+        background-color: var(--surface-link);
+    }
+}
+
+/* Core Mechanics Section */
+.mechanics-wrapper,
+.challenges-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+.mechanic-card,
+.challenge-card {
+    flex: 1 0;
+    padding: 32px;
+
+    &:hover {
+        transform: translateY(-4px);
+    }
+
+    @media (max-width: 768px) {
+        padding: 16px;
+    }
+}
+
+.mechanic-card h3,
+.challenge-card h3 {
+    font: var(--body-L-semibold);
+    color: var(--text-default);
+    margin-bottom: 12px;
+}
+
+.mechanic-card p,
+.challenge-card p {
+    flex: 1 1 auto;
+    font: var(--body-L);
+    color: var(--text-default);
+
+    &:first-of-type {
+        min-height: 192px;
+
+        @media (max-width: 768px) {
+            min-height: auto;
+        }
+    }
+
+    &:last-of-type::before {
+        content: "";
+        display: block;
+        width: 100%;
+        height: 1px;
+        background-color: var(--surface-divider);
+        margin: 24px 0;
+    }
+
+    &:only-of-type::before {
+        display: none;
+    }
+}
+
+/* TODO: Design Process Section */
+
+/* Reflection Section */
+.reflection-content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.reflection-section h3 {
+    font: var(--body-L-semibold);
+    color: var(--text-default);
+}
+
+.reflection-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.reflection-section li {
+    font: var(--body-L);
+    color: var(--text-default);
+    padding: 4px 0 4px 24px;
+    position: relative;
+}
+
+.reflection-section li::before {
+    content: "•";
+    color: var(--text-default);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
+}
+
+/* Related Projects Section */
+.related-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+    }
+}
+
+/* Contact Section */
+.contact p {
+    font: var(--body-L);
+    color: var(--text-default);
+    margin-bottom: 24px;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: row;
+    gap: 32px;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 16px;
+    }
+}

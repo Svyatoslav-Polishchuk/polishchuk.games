@@ -1,243 +1,115 @@
-// WarForged Case Study - JavaScript with Local Navigation
+// WarForged Case Study - JavaScript Slider
 
-// Carousel functionality
-let currentSlideIndex = 0;
-const slides = document.querySelectorAll('.carousel-slide');
-const indicators = document.querySelectorAll('.indicator');
-const totalSlides = slides.length;
-
-// Hero effects
-function initHeroEffects() {
-    // Typing effect for hero title
-    const heroTitle = document.getElementById('heroTitle');
-    if (heroTitle) {
-        const originalText = heroTitle.textContent;
-        heroTitle.textContent = '';
-        heroTitle.style.opacity = '1';
+class Carousel {
+    constructor(carouselElement) {
+        this.carousel = carouselElement;
+        this.slides = this.carousel.querySelectorAll('.carousel-slide');
+        this.navBtns = document.querySelectorAll('.carousel-nav-button[data-slide]');
+        this.prevBtn = document.querySelector('.carousel-nav-button.prev');
+        this.nextBtn = document.querySelector('.carousel-nav-button.next');
+        this.currentSlide = 0;
+        this.totalSlides = this.slides.length;
         
-        let i = 0;
-        const typeInterval = setInterval(() => {
-            heroTitle.textContent += originalText.charAt(i);
-            i++;
-            if (i >= originalText.length) {
-                clearInterval(typeInterval);
-            }
-        }, 150);
+        this.init();
     }
     
-    // Parallax effect for particles
-    const particles = document.querySelector('.particles');
-    if (particles) {
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const rate = scrolled * -0.5;
-            particles.style.transform = `translateY(${rate}px)`;
+    async init() {
+        await this.calculateOptimalHeight();
+        this.showSlide(0);
+        this.bindEvents();
+    }
+    
+    async calculateOptimalHeight() {
+        const images = this.carousel.querySelectorAll('.carousel-image');
+        let maxHeight = 0;
+        
+        // Wait for all images to load and find the tallest
+        const imagePromises = Array.from(images).map(img => {
+            return new Promise((resolve) => {
+                if (img.complete) {
+                    maxHeight = Math.max(maxHeight, img.naturalHeight);
+                    resolve();
+                } else {
+                    img.onload = () => {
+                        maxHeight = Math.max(maxHeight, img.naturalHeight);
+                        resolve();
+                    };
+                    img.onerror = () => resolve(); // Handle broken images
+                }
+            });
         });
+        
+        await Promise.all(imagePromises);
+        
+        // Set carousel height to the tallest image (with a reasonable max)
+        const optimalHeight = Math.min(maxHeight, 800); // Cap at 800px
+        this.carousel.style.height = `${optimalHeight}px`;
     }
     
-    // Add more dynamic particles
-    createDynamicParticles();
-}
-
-// Create additional floating particles
-function createDynamicParticles() {
-    const heroBackground = document.querySelector('.hero-background');
-    if (!heroBackground) return;
-    
-    for (let i = 0; i < 8; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'dynamic-particle';
-        particle.style.cssText = `
-            position: absolute;
-            width: ${Math.random() * 3 + 1}px;
-            height: ${Math.random() * 3 + 1}px;
-            background: var(--text-primary);
-            border-radius: 50%;
-            opacity: ${Math.random() * 0.5 + 0.2};
-            left: ${Math.random() * 100}%;
-            top: ${Math.random() * 100}%;
-            animation: floatRandom ${Math.random() * 10 + 5}s ease-in-out infinite;
-            animation-delay: ${Math.random() * 5}s;
-        `;
-        heroBackground.appendChild(particle);
-    }
-    
-    // Add CSS for dynamic particles
-    const style = document.createElement('style');
-    style.textContent = `
-        @keyframes floatRandom {
-            0%, 100% {
-                transform: translateY(0px) translateX(0px) scale(1);
-                opacity: 0.2;
-            }
-            25% {
-                transform: translateY(-15px) translateX(10px) scale(1.1);
-                opacity: 0.5;
-            }
-            50% {
-                transform: translateY(-30px) translateX(-5px) scale(0.9);
-                opacity: 0.7;
-            }
-            75% {
-                transform: translateY(-10px) translateX(-15px) scale(1.2);
-                opacity: 0.4;
-            }
+    showSlide(index) {
+        // Hide all slides
+        this.slides.forEach(slide => slide.classList.remove('active'));
+        
+        // Show current slide
+        if (this.slides[index]) {
+            this.slides[index].classList.add('active');
         }
-    `;
-    document.head.appendChild(style);
-}
-
-// Initialize carousel
-function initCarousel() {
-    if (slides.length === 0) return;
-    showSlide(0);
-}
-
-// Show specific slide
-function showSlide(index) {
-    // Hide all slides
-    slides.forEach(slide => {
-        slide.style.display = 'none';
-        slide.classList.remove('active');
-    });
-    
-    // Remove active class from all indicators
-    indicators.forEach(indicator => {
-        indicator.classList.remove('active');
-    });
-    
-    // Show current slide
-    if (slides[index]) {
-        slides[index].style.display = 'block';
-        slides[index].classList.add('active');
-    }
-    
-    // Activate current indicator
-    if (indicators[index]) {
-        indicators[index].classList.add('active');
-    }
-    
-    currentSlideIndex = index;
-}
-
-// Change slide by direction
-function changeSlide(direction) {
-    let newIndex = currentSlideIndex + direction;
-    
-    if (newIndex >= totalSlides) {
-        newIndex = 0;
-    } else if (newIndex < 0) {
-        newIndex = totalSlides - 1;
-    }
-    
-    showSlide(newIndex);
-}
-
-// Go to specific slide
-function currentSlide(index) {
-    showSlide(index - 1); // Convert to 0-based index
-}
-
-// Enhanced smooth scrolling for local navigation
-function initSmoothScrolling() {
-    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            e.preventDefault();
-            
-            const targetId = this.getAttribute('href');
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                // Calculate offset for fixed nav
-                const navHeight = document.querySelector('.nav').offsetHeight || 0;
-                const targetPosition = targetElement.offsetTop - navHeight - 20;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-                
-                // Update active nav link
-                updateActiveNavLink(this);
-            }
-        });
-    });
-}
-
-// Update active navigation link
-function updateActiveNavLink(activeLink) {
-    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-    });
-    activeLink.classList.add('active');
-}
-
-// Highlight current section in navigation on scroll
-function initScrollSpy() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-link[href^="#"]');
-    
-    window.addEventListener('scroll', () => {
-        let current = '';
-        const scrollPosition = window.pageYOffset + 100;
         
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.offsetHeight;
-            
-            if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                current = section.getAttribute('id');
-            }
+        // Update nav buttons
+        this.navBtns.forEach(btn => {
+            const slideIndex = parseInt(btn.getAttribute('data-slide'));
+            btn.classList.toggle('active', slideIndex === index);
         });
         
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${current}`) {
-                link.classList.add('active');
-            }
-        });
-    });
-}
-
-// Touch/swipe support for carousel
-function initTouchSupport() {
-    const carousel = document.querySelector('.carousel-wrapper');
-    if (!carousel) return;
+        this.currentSlide = index;
+    }
     
-    let startX = 0;
-    let endX = 0;
-    
-    carousel.addEventListener('touchstart', (e) => {
-        startX = e.touches[0].clientX;
-    });
-    
-    carousel.addEventListener('touchend', (e) => {
-        endX = e.changedTouches[0].clientX;
-        handleSwipe();
-    });
-    
-    function handleSwipe() {
-        const threshold = 50;
-        const diff = startX - endX;
-        
-        if (Math.abs(diff) > threshold) {
-            if (diff > 0) {
-                changeSlide(1); // Swipe left, go to next
-            } else {
-                changeSlide(-1); // Swipe right, go to previous
-            }
+    goToSlide(index) {
+        if (index >= 0 && index < this.totalSlides) {
+            this.showSlide(index);
         }
     }
+    
+    nextSlide() {
+        const nextIndex = (this.currentSlide + 1) % this.totalSlides;
+        this.goToSlide(nextIndex);
+    }
+    
+    prevSlide() {
+        const prevIndex = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+        this.goToSlide(prevIndex);
+    }
+    
+    bindEvents() {
+        // Numbered navigation buttons
+        this.navBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const slideIndex = parseInt(btn.getAttribute('data-slide'));
+                this.goToSlide(slideIndex);
+            });
+        });
+        
+        // Prev/Next buttons
+        if (this.prevBtn) {
+            this.prevBtn.addEventListener('click', () => this.prevSlide());
+        }
+        
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', () => this.nextSlide());
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') this.prevSlide();
+            if (e.key === 'ArrowRight') this.nextSlide();
+        });
+    }
 }
 
-// Initialize when DOM is loaded
+// Initialize carousel when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
-    initHeroEffects();
-    initCarousel();
-    initSmoothScrolling();
-    initScrollSpy();
-    initTouchSupport();
-}); 
+    const carouselElement = document.querySelector('.carousel');
+    if (carouselElement) {
+        new Carousel(carouselElement);
+    }
+});

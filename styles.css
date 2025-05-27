@@ -6,7 +6,9 @@
     --body-M-semibold: 500 1rem/1.5 var(--font-family);
     --body-L: 400 1.25rem/1.6 var(--font-family);
     --body-L-semibold: 500 1.25rem/1.6 var(--font-family);
-    --title-M: 200 2rem/1.5 var(--font-family);
+    --title-S: 400 2rem/1.5 var(--font-family);
+    --title-M: 400 3rem/1.5 var(--font-family);
+    --title-L: 600 4rem/1.5 var(--font-family);
 
     --text-default: #141414;
     --text-subtle: #666769;
@@ -21,6 +23,7 @@
     @media (max-width: 768px) {
         --body-L: 400 1.125rem/1.6 var(--font-family);
         --body-L-semibold: 500 1.125rem/1.6 var(--font-family);
+        --title-S: 400 1.5rem/1.5 var(--font-family);
         --title-M: 400 1.5rem/1.5 var(--font-family);
     }
 }
@@ -200,7 +203,7 @@ main {
 
 .link-accent {
     display: inline-block;
-    font: var(--body-M-semibold);
+    font: var(--body-L-semibold);
     color: var(--text-accent);
     text-decoration: none;
 

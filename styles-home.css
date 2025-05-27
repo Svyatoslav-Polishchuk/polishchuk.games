@@ -1,9 +1,8 @@
 /* Hero Section */
 .hero-content {
-    max-width: 560px;
+    max-width: 640px;
     display: flex;
     flex-direction: column;
-    gap: 48px;
     align-items: center;
     justify-content: center;
     text-align: center;
@@ -16,6 +15,17 @@
     font: var(--title-M);
     color: var(--text-default);
     letter-spacing: -0.02em;
+    margin-bottom: 12px;
+
+    @media (max-width: 768px) {
+        margin-bottom: 0;
+    }
+}
+
+.hero-subtitle {
+    font: var(--title-S);
+    color: var(--text-default);
+    margin-bottom: 48px;
 }
 
 /* Projects Section */

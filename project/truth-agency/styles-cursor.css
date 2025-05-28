@@ -1,0 +1,22 @@
+* {
+    cursor: url('images/cursor.png') 16 16, auto;
+}
+
+a, 
+a.project-card,
+a.project-card *,
+button,
+.clickable,
+[role="button"] {
+    cursor: url('images/pointer.png') 16 16, pointer !important;
+}
+
+/* Fallback for text selection */
+input, textarea, [contenteditable] {
+    cursor: text;
+}
+
+/* Fallback for resize elements */
+.resize, [resize] {
+    cursor: nw-resize;
+}

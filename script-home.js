@@ -136,4 +136,42 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    // Initialize expandable text functionality
+    initializeExpandableText();
 });
+
+function initializeExpandableText() {
+    const expandableElements = document.querySelectorAll('.expandable');
+    
+    expandableElements.forEach(element => {
+        element.addEventListener('click', function() {
+            const dataKey = this.getAttribute('datakey');
+            
+            if (dataKey) {
+                // Find the corresponding span with datavalue
+                const targetSpan = document.querySelector(`span[datavalue="${dataKey}"]`);
+                
+                if (targetSpan) {
+                    // Show the target span with a smooth animation
+                    targetSpan.style.display = 'inline';
+                    
+                    // Trigger the fade-in animation
+                    setTimeout(() => {
+                        targetSpan.classList.add('visible');
+                    }, 10);
+                    
+                    // Remove the expandable class and add expanded class
+                    this.classList.remove('expandable');
+                    this.classList.add('expanded');
+                }
+            }
+        });
+    });
+    
+    // Initially hide all datavalue spans
+    const dataValueSpans = document.querySelectorAll('span[datavalue]');
+    dataValueSpans.forEach(span => {
+        span.style.display = 'none';
+    });
+}

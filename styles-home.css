@@ -139,27 +139,45 @@
     margin-bottom: 24px;
 }
 
-.expandable-text {
-    padding: 4px 8px;
-    /* margin: 0 -8px; */
+.expandable {
+    padding: 3px 6px;
+    margin: 0 -4px;
     color: var(--text-default);
     background-color: var(--surface-link);
     border-radius: 8px;
+    transition: all 0.3s ease-in-out;
     cursor: pointer;
-    transition: all 0.2s ease-in-out;
+    /* 
+    position: relative;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 2px; 
+    */
 
     &:hover {
         color: var(--text-accent);
     }
+
+    &:active {
+        transform: scale(0.98);
+    }
 }
 
-.hidden-text {
-    display: none;
-    color: var(--text-default);
+.expanded {
+    margin-left: 2px;
+    cursor: default;
+    background-color: transparent;
+    /* text-decoration: none; */
 }
 
-.typing-char {
-    position: relative;
+/* Expanded text animation */
+span[datavalue] {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+span[datavalue].visible {
+    opacity: 1;
 }
 
 /* Contact Section */

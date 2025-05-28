@@ -136,100 +136,42 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+    
+    // Initialize expandable text functionality
+    initializeExpandableText();
 });
 
-// Expandable text functionality
-// function toggleExpand(element, targetId) {
-//     const hiddenText = document.getElementById(targetId);
+function initializeExpandableText() {
+    const expandableElements = document.querySelectorAll('.expandable');
     
-//     // Check if already expanded
-//     if (element.classList.contains('expanded')) {
-//         return;
-//     }
-    
-//     if (hiddenText && hiddenText.classList.contains('hidden-text')) {
-//         // Mark as expanded
-//         element.classList.add('expanded');
-//         element.onclick = null;
-//         element.style.cursor = 'default';
-//         element.style.textDecoration = 'none';
-//         element.classList.remove('expandable-text');
-        
-//         // Show the element
-//         hiddenText.style.display = 'inline';
-        
-//         // Animate only direct text nodes, leave nested elements alone
-//         animateDirectTextOnly(hiddenText);
-//     }
-// }
-
-// // Get only the direct text content, ignoring nested elements
-// function getDirectTextContent(element) {
-//     let directText = '';
-    
-//     for (let node of element.childNodes) {
-//         if (node.nodeType === Node.TEXT_NODE) {
-//             directText += node.textContent;
-//         }
-//     }
-    
-//     return directText;
-// }
-
-// function animateDirectTextOnly(element) {
-//     // Find and animate only direct text nodes
-//     const walker = document.createTreeWalker(
-//         element,
-//         NodeFilter.SHOW_TEXT,
-//         {
-//             acceptNode: function(node) {
-//                 // Only accept direct children text nodes
-//                 return node.parentNode === element ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-//             }
-//         }
-//     );
-    
-//     const textNodes = [];
-//     let node;
-//     while (node = walker.nextNode()) {
-//         if (node.textContent.trim()) {
-//             textNodes.push(node);
-//         }
-//     }
-    
-//     // Animate each direct text node
-//     textNodes.forEach(textNode => {
-//         const text = textNode.textContent;
-//         const container = document.createElement('span');
-//         textNode.parentNode.replaceChild(container, textNode);
-        
-//         let charIndex = 0;
-        
-//         function typeChar() {
-//             if (charIndex < text.length) {
-//                 const char = text[charIndex];
-//                 const span = document.createElement('span');
-//                 span.textContent = char;
-//                 span.style.color = '#999';
-//                 span.style.transition = 'color 0.8s ease-in-out';
+    expandableElements.forEach(element => {
+        element.addEventListener('click', function() {
+            const dataKey = this.getAttribute('datakey');
+            
+            if (dataKey) {
+                // Find the corresponding span with datavalue
+                const targetSpan = document.querySelector(`span[datavalue="${dataKey}"]`);
                 
-//                 container.appendChild(span);
-                
-//                 setTimeout(() => {
-//                     span.style.color = 'var(--text-default)';
-//                 }, 300 + Math.random() * 200);
-                
-//                 charIndex++;
-                
-//                 let delay = 40 + Math.random() * 30;
-//                 if (char === '.' || char === '!' || char === '?') delay += 200;
-//                 else if (char === ',' || char === ';') delay += 100;
-//                 else if (char === ' ') delay += 20;
-                
-//                 setTimeout(typeChar, delay);
-//             }
-//         }
-        
-//         setTimeout(typeChar, 150);
-//     });
-// }
+                if (targetSpan) {
+                    // Show the target span with a smooth animation
+                    targetSpan.style.display = 'inline';
+                    
+                    // Trigger the fade-in animation
+                    setTimeout(() => {
+                        targetSpan.classList.add('visible');
+                    }, 10);
+                    
+                    // Remove the expandable class and add expanded class
+                    this.classList.remove('expandable');
+                    this.classList.add('expanded');
+                }
+            }
+        });
+    });
+    
+    // Initially hide all datavalue spans
+    const dataValueSpans = document.querySelectorAll('span[datavalue]');
+    dataValueSpans.forEach(span => {
+        span.style.display = 'none';
+    });
+}

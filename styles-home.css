@@ -153,15 +153,6 @@
     }
 }
 
-.hidden-text {
-    display: none;
-    color: var(--text-default);
-}
-
-.typing-char {
-    position: relative;
-}
-
 /* Contact Section */
 .contact-links {
     display: flex;

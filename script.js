@@ -1,5 +1,18 @@
 // Smooth scrolling for navigation links
 document.addEventListener('DOMContentLoaded', function() {
+    // Store session start time
+    const sessionStartTime = Date.now();
+    
+    // Track session start
+    if (typeof umami !== 'undefined') {
+        umami.track('session-start', { 
+            page: 'home',
+            timestamp: sessionStartTime,
+            userAgent: navigator.userAgent,
+            viewport: `${window.innerWidth}x${window.innerHeight}`
+        });
+    }
+
     // Smooth scroll for navigation links
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
@@ -7,6 +20,14 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
+            
+            // Track global navigation clicks
+            if (typeof umami !== 'undefined') {
+                umami.track('global-navigation-click', { 
+                    section: targetId.replace('#', ''),
+                    page: 'home'
+                });
+            }
             
             if (targetSection) {
                 const offsetTop = targetSection.offsetTop - 80; // Account for fixed nav
@@ -23,7 +44,16 @@ document.addEventListener('DOMContentLoaded', function() {
     if (ctaButton) {
         ctaButton.addEventListener('click', function(e) {
             e.preventDefault();
-            const targetSection = document.querySelector('#contact');
+            
+            // Track CTA button clicks
+            if (typeof umami !== 'undefined') {
+                umami.track('hero-cta-click', { 
+                    button: 'learn-more',
+                    page: 'home'
+                });
+            }
+            
+            const targetSection = document.querySelector('#about');
             if (targetSection) {
                 const offsetTop = targetSection.offsetTop - 80;
                 window.scrollTo({
@@ -34,8 +64,70 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // Track contact link clicks
+    const contactLinks = document.querySelectorAll('#contact a');
+    contactLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            const href = this.getAttribute('href');
+            let linkType = 'contact-link';
+            
+            if (href.includes('linkedin.com')) {
+                linkType = 'contact-linkedin';
+            } else if (href.includes('mailto:')) {
+                linkType = 'contact-email';
+            }
+            
+            if (typeof umami !== 'undefined') {
+                umami.track(linkType, { 
+                    url: href,
+                    page: 'home'
+                });
+            }
+        });
+    });
+
+    // Track resume download
+    const resumeLink = document.querySelector('a[download*="Resume"]');
+    if (resumeLink) {
+        resumeLink.addEventListener('click', function() {
+            if (typeof umami !== 'undefined') {
+                umami.track('resume-download', { 
+                    file: 'resume',
+                    page: 'home'
+                });
+            }
+        });
+    }
+
+    // Track scroll depth
+    let maxScrollDepth = 0;
+    let scrollDepthMarkers = [25, 50, 75, 90, 100];
+    let trackedMarkers = new Set();
+
+    function trackScrollDepth() {
+        const scrollTop = window.pageYOffset;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = Math.round((scrollTop / docHeight) * 100);
+        
+        maxScrollDepth = Math.max(maxScrollDepth, scrollPercent);
+        
+        scrollDepthMarkers.forEach(marker => {
+            if (scrollPercent >= marker && !trackedMarkers.has(marker)) {
+                trackedMarkers.add(marker);
+                if (typeof umami !== 'undefined') {
+                    umami.track('scroll-depth', { 
+                        depth: marker,
+                        page: 'home'
+                    });
+                }
+            }
+        });
+    }
+
     // Active navigation highlighting
     window.addEventListener('scroll', function() {
+        trackScrollDepth();
+        
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
         
@@ -86,6 +178,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.classList.add('active');
             }
         });
+    });
+
+    // Track session end on page unload
+    window.addEventListener('beforeunload', function() {
+        if (typeof umami !== 'undefined') {
+            const sessionLength = Date.now() - sessionStartTime;
+            umami.track('session-end', { 
+                page: 'home',
+                sessionLength: Math.round(sessionLength / 1000), // in seconds
+                maxScrollDepth: maxScrollDepth
+            });
+        }
     });
 });
 

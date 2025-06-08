@@ -1,4 +1,4 @@
-// WarForged Case Study - JavaScript Slider with Analytics
+// Project Page - JavaScript with Link Tracking Only
 
 class Carousel {
     constructor(carouselElement) {
@@ -61,16 +61,6 @@ class Carousel {
             btn.classList.toggle('active', slideIndex === index);
         });
         
-        // Track carousel slide change (only if slide actually changed)
-        if (typeof umami !== 'undefined' && this.currentSlide !== index) {
-            umami.track('project-carousel-slide-change', { 
-                slideIndex: index,
-                totalSlides: this.totalSlides,
-                projectName: this.getProjectName(),
-                page: 'project'
-            });
-        }
-        
         this.currentSlide = index;
     }
     
@@ -82,40 +72,12 @@ class Carousel {
     
     nextSlide() {
         const nextIndex = (this.currentSlide + 1) % this.totalSlides;
-        
-        // Track next button click
-        if (typeof umami !== 'undefined') {
-            umami.track('project-carousel-next', { 
-                currentSlide: this.currentSlide,
-                nextSlide: nextIndex,
-                projectName: this.getProjectName(),
-                page: 'project'
-            });
-        }
-        
         this.goToSlide(nextIndex);
     }
     
     prevSlide() {
         const prevIndex = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
-        
-        // Track previous button click
-        if (typeof umami !== 'undefined') {
-            umami.track('project-carousel-prev', { 
-                currentSlide: this.currentSlide,
-                prevSlide: prevIndex,
-                projectName: this.getProjectName(),
-                page: 'project'
-            });
-        }
-        
         this.goToSlide(prevIndex);
-    }
-    
-    getProjectName() {
-        // Extract project name from URL or page title
-        const pathParts = window.location.pathname.split('/');
-        return pathParts[pathParts.length - 2] || document.querySelector('.hero-title')?.textContent || 'unknown';
     }
     
     bindEvents() {
@@ -123,17 +85,6 @@ class Carousel {
         this.navBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const slideIndex = parseInt(btn.getAttribute('data-slide'));
-                
-                // Track numbered navigation click
-                if (typeof umami !== 'undefined') {
-                    umami.track('project-carousel-numbered-nav', { 
-                        targetSlide: slideIndex,
-                        currentSlide: this.currentSlide,
-                        projectName: this.getProjectName(),
-                        page: 'project'
-                    });
-                }
-                
                 this.goToSlide(slideIndex);
             });
         });
@@ -149,49 +100,15 @@ class Carousel {
         
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowLeft') {
-                // Track keyboard navigation
-                if (typeof umami !== 'undefined') {
-                    umami.track('project-carousel-keyboard', { 
-                        key: 'ArrowLeft',
-                        direction: 'previous',
-                        projectName: this.getProjectName(),
-                        page: 'project'
-                    });
-                }
-                this.prevSlide();
-            }
-            if (e.key === 'ArrowRight') {
-                // Track keyboard navigation
-                if (typeof umami !== 'undefined') {
-                    umami.track('project-carousel-keyboard', { 
-                        key: 'ArrowRight',
-                        direction: 'next',
-                        projectName: this.getProjectName(),
-                        page: 'project'
-                    });
-                }
-                this.nextSlide();
-            }
+            if (e.key === 'ArrowLeft') this.prevSlide();
+            if (e.key === 'ArrowRight') this.nextSlide();
         });
     }
 }
 
-// Initialize carousel and tracking when DOM is loaded
+// Initialize carousel and link tracking when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     const projectName = getProjectName();
-    const sessionStartTime = Date.now();
-    
-    // Track session start for project page
-    if (typeof umami !== 'undefined') {
-        umami.track('session-start', { 
-            page: 'project',
-            projectName: projectName,
-            timestamp: sessionStartTime,
-            userAgent: navigator.userAgent,
-            viewport: `${window.innerWidth}x${window.innerHeight}`
-        });
-    }
     
     // Initialize carousel
     const carouselElement = document.querySelector('.carousel');
@@ -199,138 +116,70 @@ document.addEventListener('DOMContentLoaded', function() {
         new Carousel(carouselElement);
     }
     
-    // Track project navigation clicks
-    const navLinks = document.querySelectorAll('.nav-link');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            const section = this.getAttribute('href').replace('#', '');
-            
-            if (typeof umami !== 'undefined') {
-                umami.track('project-navigation-click', { 
-                    section: section,
-                    projectName: projectName,
-                    page: 'project'
-                });
-            }
-        });
-    });
-    
-    // Track documentation link clicks
-    const docLinks = document.querySelectorAll('#documentation a[href$=".pdf"]');
-    docLinks.forEach(link => {
+    // Track ALL links comprehensively
+    const allLinks = document.querySelectorAll('a[href]');
+    allLinks.forEach(link => {
         link.addEventListener('click', function() {
             const href = this.getAttribute('href');
-            const documentType = this.textContent.trim();
+            const linkText = this.textContent.trim();
             
-            if (typeof umami !== 'undefined') {
-                umami.track('project-documentation-click', { 
-                    documentType: documentType,
-                    url: href,
-                    projectName: projectName,
-                    page: 'project'
-                });
-            }
-        });
-    });
-    
-    // Track related project clicks
-    const relatedProjectLinks = document.querySelectorAll('.related .project-card');
-    relatedProjectLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            const relatedProjectName = this.querySelector('.card-title').textContent;
-            const href = this.getAttribute('href');
-            
-            if (typeof umami !== 'undefined') {
-                umami.track('related-project-click', { 
-                    relatedProject: relatedProjectName,
-                    currentProject: projectName,
-                    url: href,
-                    page: 'project'
-                });
-            }
-        });
-    });
-    
-    // Track back to projects link
-    const backLink = document.querySelector('.backlink-link');
-    if (backLink) {
-        backLink.addEventListener('click', function() {
-            if (typeof umami !== 'undefined') {
-                umami.track('back-to-projects-click', { 
-                    currentProject: projectName,
-                    page: 'project'
-                });
-            }
-        });
-    }
-    
-    // Track contact link clicks
-    const contactLinks = document.querySelectorAll('.contact a');
-    contactLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            const href = this.getAttribute('href');
-            let linkType = 'contact-link';
-            
-            if (href.includes('linkedin.com')) {
-                linkType = 'contact-linkedin';
-            } else if (href.includes('mailto:')) {
-                linkType = 'contact-email';
-            }
-            
-            if (typeof umami !== 'undefined') {
-                umami.track(linkType, { 
-                    url: href,
-                    projectName: projectName,
-                    page: 'project'
-                });
-            }
-        });
-    });
-    
-    // Track scroll depth
-    let maxScrollDepth = 0;
-    let scrollDepthMarkers = [25, 50, 75, 90, 100];
-    let trackedMarkers = new Set();
-    
-    function trackScrollDepth() {
-        const scrollTop = window.pageYOffset;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollPercent = Math.round((scrollTop / docHeight) * 100);
-        
-        maxScrollDepth = Math.max(maxScrollDepth, scrollPercent);
-        
-        scrollDepthMarkers.forEach(marker => {
-            if (scrollPercent >= marker && !trackedMarkers.has(marker)) {
-                trackedMarkers.add(marker);
-                if (typeof umami !== 'undefined') {
-                    umami.track('scroll-depth', { 
-                        depth: marker,
-                        projectName: projectName,
-                        page: 'project'
-                    });
-                }
-            }
-        });
-    }
-    
-    window.addEventListener('scroll', trackScrollDepth);
-    
-    // Track session end on page unload
-    window.addEventListener('beforeunload', function() {
-        if (typeof umami !== 'undefined') {
-            const sessionLength = Date.now() - sessionStartTime;
-            umami.track('session-end', { 
-                page: 'project',
+            let eventName = 'link-click';
+            let eventData = {
+                url: href,
+                text: linkText,
                 projectName: projectName,
-                sessionLength: Math.round(sessionLength / 1000), // in seconds
-                maxScrollDepth: maxScrollDepth
-            });
-        }
+                page: 'project'
+            };
+            
+            // Navigation links
+            if (this.classList.contains('nav-link')) {
+                const section = href.replace('#', '');
+                eventName = `${projectName}-navigation-${section}-click`;
+                eventData.section = section;
+            }
+            // Documentation links (PDFs)
+            else if (href.includes('.pdf')) {
+                const documentType = linkText.toLowerCase().replace(/\s+/g, '-');
+                eventName = `${projectName}-${documentType}-download`;
+                eventData.documentType = documentType;
+            }
+            // Related project links
+            else if (this.classList.contains('project-card')) {
+                const relatedProjectName = this.querySelector('.card-title')?.textContent.toLowerCase().replace(/\s+/g, '-') || 'unknown';
+                eventName = `${projectName}-to-${relatedProjectName}-click`;
+                eventData.relatedProject = relatedProjectName;
+                eventData.currentProject = projectName;
+            }
+            // Back to projects link
+            else if (this.classList.contains('backlink-link') || href === '/#projects') {
+                eventName = `${projectName}-back-to-projects-click`;
+                eventData.currentProject = projectName;
+            }
+            // Contact links
+            else if (href.includes('linkedin.com')) {
+                eventName = `${projectName}-contact-linkedin-click`;
+            } else if (href.includes('mailto:')) {
+                eventName = `${projectName}-contact-email-click`;
+                eventData.email = 'bohdan.polishchuk2000@gmail.com';
+            }
+            // External links
+            else if (href.startsWith('http') && !href.includes(window.location.hostname)) {
+                eventName = `${projectName}-external-link-click`;
+            }
+            // Internal links
+            else if (href.startsWith('/') || href.startsWith('./')) {
+                eventName = `${projectName}-internal-link-click`;
+            }
+            
+            if (typeof umami !== 'undefined') {
+                umami.track(eventName, eventData);
+            }
+        });
     });
 });
 
 // Helper function to get project name
 function getProjectName() {
     const pathParts = window.location.pathname.split('/');
-    return pathParts[pathParts.length - 2] || document.querySelector('.hero-title')?.textContent || 'unknown';
+    return pathParts[pathParts.length - 2] || document.querySelector('.hero-title')?.textContent?.toLowerCase().replace(/\s+/g, '-') || 'unknown';
 }

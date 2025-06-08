@@ -37,16 +37,6 @@ function scrollProjects(direction) {
     const cards = document.querySelectorAll('.project-card');
     const totalCards = cards.length;
     
-    // Track carousel navigation
-    if (typeof umami !== 'undefined') {
-        umami.track('carousel-navigation-click', { 
-            direction: direction === 1 ? 'next' : 'previous',
-            currentIndex: currentIndex,
-            totalProjects: totalCards,
-            page: 'home'
-        });
-    }
-    
     if (direction === 1) {
         currentIndex = Math.min(currentIndex + 1, totalCards - 2);
     } else {
@@ -65,22 +55,6 @@ function updateCarousel() {
     const translateX = -(currentIndex * (cardWidth + gap));
     
     projectsWrapper.style.transform = `translateX(${translateX}px)`;
-    
-    // Track which project card is currently visible (only if it changed)
-    if (typeof umami !== 'undefined' && cards[currentIndex]) {
-        const visibleProject = cards[currentIndex].querySelector('.card-title').textContent;
-        
-        // Only track if the project actually changed
-        if (window.lastTrackedProject !== visibleProject) {
-            window.lastTrackedProject = visibleProject;
-            umami.track('project-card-visible', { 
-                project: visibleProject,
-                position: currentIndex + 1,
-                totalProjects: cards.length,
-                page: 'home'
-            });
-        }
-    }
 }
 
 function snapToNearestCard() {
@@ -112,29 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize button states
     updateButtonStates();
-    
-    // Track initial project card visibility
-    updateCarousel();
-    
-    // Track GDD link clicks
-    const gddLinks = document.querySelectorAll('.gdd-card .card-link');
-    gddLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            const gddCard = this.closest('.gdd-card');
-            const projectTitle = gddCard.querySelector('.card-title').textContent;
-            const documentType = this.textContent.trim();
-            const href = this.getAttribute('href');
-            
-            if (typeof umami !== 'undefined') {
-                umami.track('gdd-link-click', { 
-                    project: projectTitle,
-                    documentType: documentType,
-                    url: href,
-                    page: 'home'
-                });
-            }
-        });
-    });
     
     if (projectsContainer) {
         // Wheel scroll handling with accumulation
@@ -198,9 +149,9 @@ function initializeExpandableText() {
             const dataKey = this.getAttribute('datakey');
             const expandedText = this.textContent;
             
-            // Track interactive element clicks in about section
+            // Track expandable text clicks
             if (typeof umami !== 'undefined') {
-                umami.track('about-interactive-click', { 
+                umami.track(`about-expand-${dataKey}-click`, { 
                     dataKey: dataKey,
                     text: expandedText,
                     page: 'home'

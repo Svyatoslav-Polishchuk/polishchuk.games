@@ -1,18 +1,5 @@
 // Smooth scrolling for navigation links
 document.addEventListener('DOMContentLoaded', function() {
-    // Store session start time
-    const sessionStartTime = Date.now();
-    
-    // Track session start
-    if (typeof umami !== 'undefined') {
-        umami.track('session-start', { 
-            page: 'home',
-            timestamp: sessionStartTime,
-            userAgent: navigator.userAgent,
-            viewport: `${window.innerWidth}x${window.innerHeight}`
-        });
-    }
-
     // Smooth scroll for navigation links
     const navLinks = document.querySelectorAll('.nav-link');
     navLinks.forEach(link => {
@@ -21,10 +8,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const targetId = this.getAttribute('href');
             const targetSection = document.querySelector(targetId);
             
-            // Track global navigation clicks
+            // Track specific navigation clicks
+            const section = targetId.replace('#', '');
             if (typeof umami !== 'undefined') {
-                umami.track('global-navigation-click', { 
-                    section: targetId.replace('#', ''),
+                umami.track(`navigation-${section}-click`, { 
+                    section: section,
                     page: 'home'
                 });
             }
@@ -47,8 +35,9 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Track CTA button clicks
             if (typeof umami !== 'undefined') {
-                umami.track('hero-cta-click', { 
+                umami.track('hero-learn-more-click', { 
                     button: 'learn-more',
+                    target: 'about',
                     page: 'home'
                 });
             }
@@ -64,76 +53,78 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Track contact link clicks
-    const contactLinks = document.querySelectorAll('#contact a');
-    contactLinks.forEach(link => {
+    // Track ALL links comprehensively
+    const allLinks = document.querySelectorAll('a[href]');
+    allLinks.forEach(link => {
         link.addEventListener('click', function() {
             const href = this.getAttribute('href');
-            let linkType = 'contact-link';
+            const linkText = this.textContent.trim();
+            const linkClass = this.className;
             
+            // Skip navigation links (already tracked above)
+            if (this.classList.contains('nav-link') || this.classList.contains('hero-link')) {
+                return;
+            }
+            
+            let eventName = 'link-click';
+            let eventData = {
+                url: href,
+                text: linkText,
+                page: 'home'
+            };
+            
+            // Contact links
             if (href.includes('linkedin.com')) {
-                linkType = 'contact-linkedin';
+                eventName = 'contact-linkedin-click';
             } else if (href.includes('mailto:')) {
-                linkType = 'contact-email';
+                eventName = 'contact-email-click';
+                eventData.email = 'bohdan.polishchuk2000@gmail.com';
+            }
+            // Resume download
+            else if (href.includes('Resume') || this.hasAttribute('download')) {
+                eventName = 'resume-download-click';
+                eventData.file = 'Bohdan-Polishchuk-Resume-Game-Designer.pdf';
+            }
+            // Project cards
+            else if (this.classList.contains('project-card')) {
+                const projectTitle = this.querySelector('.card-title')?.textContent.toLowerCase().replace(/\s+/g, '-') || 'unknown';
+                eventName = `project-${projectTitle}-click`;
+                eventData.project = projectTitle;
+            }
+            // GDD links
+            else if (this.classList.contains('card-link') && href.includes('.pdf')) {
+                const gddCard = this.closest('.gdd-card');
+                const projectTitle = gddCard?.querySelector('.card-title')?.textContent.toLowerCase().replace(/\s+/g, '-') || 'unknown';
+                const documentType = linkText.toLowerCase().replace(/\s+/g, '-');
+                eventName = `gdd-${projectTitle}-${documentType}-click`;
+                eventData.project = projectTitle;
+                eventData.documentType = documentType;
+            }
+            // External links
+            else if (href.startsWith('http') && !href.includes(window.location.hostname)) {
+                eventName = 'external-link-click';
+            }
+            // Internal page links
+            else if (href.startsWith('/project/')) {
+                const projectName = href.split('/')[2] || 'unknown';
+                eventName = `project-${projectName}-click`;
+                eventData.project = projectName;
             }
             
             if (typeof umami !== 'undefined') {
-                umami.track(linkType, { 
-                    url: href,
-                    page: 'home'
-                });
+                umami.track(eventName, eventData);
             }
         });
     });
 
-    // Track resume download
-    const resumeLink = document.querySelector('a[download*="Resume"]');
-    if (resumeLink) {
-        resumeLink.addEventListener('click', function() {
-            if (typeof umami !== 'undefined') {
-                umami.track('resume-download', { 
-                    file: 'resume',
-                    page: 'home'
-                });
-            }
-        });
-    }
-
-    // Track scroll depth
-    let maxScrollDepth = 0;
-    let scrollDepthMarkers = [25, 50, 75, 90, 100];
-    let trackedMarkers = new Set();
-
-    function trackScrollDepth() {
-        const scrollTop = window.pageYOffset;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollPercent = Math.round((scrollTop / docHeight) * 100);
-        
-        maxScrollDepth = Math.max(maxScrollDepth, scrollPercent);
-        
-        scrollDepthMarkers.forEach(marker => {
-            if (scrollPercent >= marker && !trackedMarkers.has(marker)) {
-                trackedMarkers.add(marker);
-                if (typeof umami !== 'undefined') {
-                    umami.track('scroll-depth', { 
-                        depth: marker,
-                        page: 'home'
-                    });
-                }
-            }
-        });
-    }
-
     // Active navigation highlighting
     window.addEventListener('scroll', function() {
-        trackScrollDepth();
-        
         const sections = document.querySelectorAll('section[id]');
         const navLinks = document.querySelectorAll('.nav-link');
         
         // Don't activate anything until user scrolls down a bit
         const scrollThreshold = 100; // pixels
-        if (window.pageYOffset < scrollThreshold) {
+        if (window.scrollY < scrollThreshold) {
             navLinks.forEach(link => {
                 link.classList.remove('active');
             });
@@ -141,7 +132,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         let current = '';
-        const viewportTop = window.pageYOffset;
+        const viewportTop = window.scrollY;
         const viewportBottom = viewportTop + window.innerHeight;
         
         sections.forEach(section => {
@@ -178,18 +169,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 link.classList.add('active');
             }
         });
-    });
-
-    // Track session end on page unload
-    window.addEventListener('beforeunload', function() {
-        if (typeof umami !== 'undefined') {
-            const sessionLength = Date.now() - sessionStartTime;
-            umami.track('session-end', { 
-                page: 'home',
-                sessionLength: Math.round(sessionLength / 1000), // in seconds
-                maxScrollDepth: maxScrollDepth
-            });
-        }
     });
 });
 

@@ -5,24 +5,26 @@
     --body-M: 400 1rem/1.5 var(--font-family);
     --body-M-semibold: 500 1rem/1.5 var(--font-family);
     --body-L: 400 1.25rem/1.6 var(--font-family);
-    --body-L-semibold: 500 1.25rem/1.6 var(--font-family);
+    --body-L-semibold: 600 1.25rem/1.6 var(--font-family);
     --title-S: 400 2rem/1.5 var(--font-family);
     --title-M: 400 3rem/1.5 var(--font-family);
     --title-L: 600 4rem/1.5 var(--font-family);
 
     --text-default: #141414;
+    --text-inverted: #F5F7FA;
     --text-subtle: #666769;
     --text-accent: #367AE0;
     --text-accent-hover: #2c5aa0;
 
     --surface-bg: #F5F7FA;
+    --surface-bg-inverted: #141414;
     --surface-card: #F0F2F5;
     --surface-link: #E9EDF5;
     --surface-divider: #E0E2E5;
 
     @media (max-width: 768px) {
         --body-L: 400 1.125rem/1.6 var(--font-family);
-        --body-L-semibold: 500 1.125rem/1.6 var(--font-family);
+        --body-L-semibold: 600 1.125rem/1.6 var(--font-family);
         --title-S: 400 1.5rem/1.5 var(--font-family);
         --title-M: 400 1.5rem/1.5 var(--font-family);
         --title-L: 600 2.5rem/1.5 var(--font-family);
@@ -84,6 +86,14 @@ main {
     font: var(--body-M);
     color: var(--text-subtle);
     padding-left: 32px;
+
+    &.card-offset {
+        margin-top: 38px;
+
+        @media (max-width: 768px) {
+            margin-top: 0;
+        }
+    }
 
     @media (max-width: 768px) {
         padding-left: 8px;
@@ -278,8 +288,9 @@ main {
     display: flex;
     flex-direction: row;
     align-items: center;
-    background-color: rgba(var(--surface-bg), 0.95);
-    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255, 0.2);
+    background-color: rgba(255,255,255, 0.6);
+    backdrop-filter: blur(16px);
     border-radius: 99px;
     padding: 2px;
 }

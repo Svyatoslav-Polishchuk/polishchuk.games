@@ -11,8 +11,9 @@
     display: flex;
     align-items: center;
     padding: 2px;
-    background-color: rgba(var(--surface-bg), 0.95);
-    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255, 0.2);
+    background-color: rgba(255,255,255, 0.6);
+    backdrop-filter: blur(16px);
     border-radius: 99px;
 }
 
@@ -281,17 +282,14 @@
 .mechanics-wrapper,
 .challenges-wrapper {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 16px;
-
-    @media (max-width: 768px) {
-        flex-direction: column;
-    }
 }
 
 .mechanic-card,
 .challenge-card {
-    flex: 1 0;
+    display: flex;
+    flex-direction: column;
     padding: 32px;
 
     &:hover {
@@ -312,33 +310,26 @@
 
 .mechanic-card p,
 .challenge-card p {
-    flex: 1 1 auto;
     font: var(--body-L);
     color: var(--text-default);
 
-    &:first-of-type {
-        min-height: 192px;
-
-        @media (max-width: 768px) {
-            min-height: auto;
-        }
-    }
-
-    &:last-of-type::before {
+    &::before {
         content: "";
         display: block;
         width: 100%;
         height: 1px;
         background-color: var(--surface-divider);
         margin: 24px 0;
+
+        @media (max-width: 768px) {
+            margin: 12px 0;
+        }
     }
 
-    &:only-of-type::before {
+    &:first-of-type::before {
         display: none;
     }
 }
-
-/* TODO: Design Process Section */
 
 .documentation-content {
     display: flex;
@@ -348,6 +339,45 @@
     a {
         width: fit-content;
     }
+}
+
+/* Design Process Section */
+.process-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.process-card {
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+}
+
+.step-number {
+    font: var(--body-L-semibold);
+    color: var(--text-inverted);
+    background-color: var(--surface-bg-inverted);
+    border-radius: 8px;
+    display: flex;
+    flex: 0 0 2.5rem;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+}
+
+.step-content h3 {
+    font: var(--body-L-semibold);
+    color: var(--text-default);
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.step-content p {
+    font: var(--body-L);
+    color: var(--text-default);
 }
 
 /* Reflection Section */
@@ -360,6 +390,7 @@
 .reflection-section h3 {
     font: var(--body-L-semibold);
     color: var(--text-default);
+    margin-bottom: 12px;
 }
 
 .reflection-section ul {

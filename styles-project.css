@@ -298,6 +298,7 @@
 
     @media (max-width: 768px) {
         padding: 16px;
+        margin: 0 -16px;
     }
 }
 
@@ -346,12 +347,21 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
+
+    @media (max-width: 768px) {
+        gap: 40px;
+    }
 }
 
 .process-card {
     display: flex;
     flex-direction: row;
     gap: 16px;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 8px;
+    }
 }
 
 .step-number {
